@@ -1,0 +1,113 @@
+/* Doubled up on the class so this wins over the generic `.section` padding. */
+.section.skills {
+  padding-top: clamp(20px, 2.4vw, 32px);
+  background: #070819;
+}
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(12px, 1.5vw, 18px);
+}
+
+.skillcard {
+  --tone: #a855f7;
+  padding: clamp(16px, 1.6vw, 20px) clamp(14px, 1.5vw, 18px) clamp(18px, 1.8vw, 22px);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.022);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.skillcard--violet { --tone: #a855f7; }
+.skillcard--blue { --tone: #3b82f6; }
+.skillcard--teal { --tone: #2dd4bf; }
+.skillcard--indigo { --tone: #6366f1; }
+.skillcard--fuchsia { --tone: #d946ef; }
+
+.skillcard:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.045);
+  border-color: color-mix(in srgb, var(--tone) 45%, transparent);
+  box-shadow: 0 22px 45px -24px color-mix(in srgb, var(--tone) 75%, transparent);
+}
+
+.skillcard__head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 16px;
+  font-size: clamp(14px, 1.15vw, 15.5px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.skillcard__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--tone);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--tone) 60%, transparent));
+}
+
+.skillcard__list {
+  display: grid;
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.skill__name {
+  font-size: clamp(12.5px, 1vw, 13.5px);
+  color: var(--text-muted);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.skill__meter {
+  display: inline-flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.skill__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.13);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill__dot.is-on {
+  background: var(--tone);
+  box-shadow: 0 0 7px -1px color-mix(in srgb, var(--tone) 85%, transparent);
+}
+
+/* ── responsive ─────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .skills__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .skills__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 460px) {
+  .skills__grid {
+    grid-template-columns: 1fr;
+  }
+}
