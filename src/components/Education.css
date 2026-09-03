@@ -1,0 +1,156 @@
+.section.education {
+  padding-top: clamp(30px, 3.6vw, 48px);
+  background: #070819;
+}
+
+.edu__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(42px, 5vw, 72px) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+/* ── centre timeline ────────────────────────────────────── */
+.edu__node {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.edu__node::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.edu__dot {
+  position: relative;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--violet-bright);
+  box-shadow:
+    0 0 0 4px rgba(124, 92, 255, 0.16),
+    0 0 14px 2px rgba(157, 123, 255, 0.8);
+}
+
+/* ── entry rows ─────────────────────────────────────────── */
+.entry {
+  --tone: #8b5cf6;
+  --tone-2: #c084fc;
+  display: grid;
+  grid-template-columns: auto minmax(46px, auto) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(11px, 1.4vw, 18px);
+  padding: clamp(13px, 1.5vw, 17px) clamp(14px, 1.5vw, 18px);
+  border: 1px solid var(--border);
+  border-bottom: 0;
+  background: rgba(255, 255, 255, 0.022);
+  transition: background 0.28s ease, border-color 0.28s ease;
+}
+
+.entry--pink { --tone: #ec4899; --tone-2: #f472b6; }
+
+.entry.is-first {
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+.entry.is-last {
+  border-bottom: 1px solid var(--border);
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+.entry:not(.entry--empty):hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: color-mix(in srgb, var(--tone) 40%, transparent);
+}
+
+.entry__badge {
+  display: grid;
+  place-items: center;
+  width: clamp(40px, 3.4vw, 48px);
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--tone) 45%, transparent);
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--tone) 26%, transparent),
+    rgba(255, 255, 255, 0.02)
+  );
+  color: var(--tone-2);
+  box-shadow: 0 0 20px -8px color-mix(in srgb, var(--tone) 85%, transparent);
+}
+
+.entry__icon {
+  width: 52%;
+  height: 52%;
+}
+
+.entry__date {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(12px, 1vw, 13.5px);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--tone-2);
+}
+
+.entry__title {
+  font-family: var(--sans);
+  font-size: clamp(13.5px, 1.1vw, 15px);
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 5px;
+}
+
+.entry__line {
+  font-size: clamp(11.5px, 0.95vw, 13px);
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* ── responsive ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .edu__grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .edu__node {
+    display: none;
+  }
+
+  .entry--empty {
+    display: none;
+  }
+
+  /* keep education together, then achievements */
+  .entry--left { order: 0; }
+  .entry--right { order: 1; }
+
+  .entry {
+    border-bottom: 1px solid var(--border);
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .entry {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .entry__date {
+    flex-direction: row;
+    gap: 5px;
+    align-self: center;
+  }
+
+  .entry__text {
+    grid-column: 1 / -1;
+  }
+}
