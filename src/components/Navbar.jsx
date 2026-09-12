@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CloseIcon, DownloadIcon, LogoMark, MenuIcon } from './icons/BrandIcons'
+import { CloseIcon, DownloadIcon, MenuIcon } from './icons/BrandIcons'
 import './Navbar.css'
 
 const LINKS = [
@@ -59,11 +59,6 @@ export default function Navbar({ cvHref }) {
   return (
     <header className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="nav__inner">
-        <a className="brand" href="#home" onClick={() => setOpen(false)}>
-          <LogoMark className="brand__mark" aria-hidden="true" />
-          <span className="brand__name">Kavinda Malwewa</span>
-        </a>
-
         <nav className="nav__links" aria-label="Primary">
           {LINKS.map((link) => (
             <a

@@ -23,29 +23,6 @@
   gap: 24px;
 }
 
-/* ── brand ── */
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 11px;
-  flex-shrink: 0;
-}
-
-.brand__mark {
-  width: 30px;
-  height: 30px;
-}
-
-.brand__name {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: #fff;
-  white-space: nowrap;
-}
-
 /* ── desktop links ── */
 .nav__links {
   display: flex;
@@ -92,6 +69,7 @@
 
 .nav__actions {
   display: flex;
+  margin-left: auto;
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
@@ -167,8 +145,5 @@
 @media (max-width: 560px) {
   .nav__actions .btn--primary {
     display: none;
-  }
-  .brand__name {
-    font-size: 13px;
   }
 }

@@ -1,5 +1,8 @@
-import { ArrowRight, CodeGlyph, DownloadIcon } from './icons/BrandIcons'
+import { ArrowRight, CodeGlyph } from './icons/BrandIcons'
 import TechStrip from './TechStrip'
+// Swap this file (src/assets/kavinda.png) for your own photo, or point the import
+// at a new filename — Vite hashes and bundles whatever it resolves to.
+import heroPhoto from '../assets/kavinda.png'
 import './Hero.css'
 
 const ROLES = [
@@ -47,48 +50,55 @@ export default function Hero({ cvHref }) {
               View My Work
               <ArrowRight className="btn__icon" aria-hidden="true" />
             </a>
-            <a className="btn btn--ghost" href={cvHref} download>
-              Download CV
-              <DownloadIcon className="btn__icon" aria-hidden="true" />
-            </a>
           </div>
 
           <TechStrip />
         </div>
 
-        <div className="hero__visual" aria-hidden="true">
-          <span className="hero__orb" />
-          <span className="hero__ring" />
-          <span className="hero__dots hero__dots--top" />
-          <span className="hero__dots hero__dots--bottom" />
+        <div className="hero__visual">
+          <span className="hero__dots hero__dots--top" aria-hidden="true" />
+          <span className="hero__dots hero__dots--bottom" aria-hidden="true" />
 
-          <figure className="codecard">
-            <figcaption className="codecard__bar">
-              <CodeGlyph className="codecard__glyph" />
-              <span className="codecard__title">Code</span>
-              <span className="codecard__dot" />
-            </figcaption>
-            <pre className="codecard__body">
-              <code>
-                <span className="tok-kw">const</span>{' '}
-                <span className="tok-var">developer</span>{' '}
-                <span className="tok-op">=</span> {'{'}
-                {'\n  '}
-                <span className="tok-prop">name</span>:{' '}
-                <span className="tok-str">"Kavinda"</span>,{'\n  '}
-                <span className="tok-prop">skills</span>: [
-                <span className="tok-str">"AI/ML"</span>,{' '}
-                <span className="tok-str">"SE"</span>,{'\n    '}
-                <span className="tok-str">"QA"</span>,{' '}
-                <span className="tok-str">"Python"</span>,{' '}
-                <span className="tok-str">"JS"</span>],{'\n  '}
-                <span className="tok-prop">passion</span>:{' '}
-                <span className="tok-str">"Building intelligent{'\n    '}solutions"</span>
-                ,{'\n'}
-                {'};'}
-              </code>
-            </pre>
-          </figure>
+          <div className="hero__cards">
+            <figure className="photocard">
+              <img
+                className="photocard__img"
+                src={heroPhoto}
+                alt="Kavinda Malwewa"
+                width="1272"
+                height="1236"
+                loading="eager"
+              />
+            </figure>
+
+            <figure className="codecard" aria-hidden="true">
+              <figcaption className="codecard__bar">
+                <CodeGlyph className="codecard__glyph" />
+                <span className="codecard__title">Code</span>
+                <span className="codecard__dot" />
+              </figcaption>
+              <pre className="codecard__body">
+                <code>
+                  <span className="tok-kw">const</span>{' '}
+                  <span className="tok-var">developer</span>{' '}
+                  <span className="tok-op">=</span> {'{'}
+                  {'\n  '}
+                  <span className="tok-prop">name</span>:{' '}
+                  <span className="tok-str">"Kavinda"</span>,{'\n  '}
+                  <span className="tok-prop">skills</span>: [
+                  <span className="tok-str">"AI/ML"</span>,{' '}
+                  <span className="tok-str">"SE"</span>,{'\n    '}
+                  <span className="tok-str">"QA"</span>,{' '}
+                  <span className="tok-str">"Python"</span>,{' '}
+                  <span className="tok-str">"JS"</span>],{'\n  '}
+                  <span className="tok-prop">passion</span>:{' '}
+                  <span className="tok-str">"Building intelligent{'\n    '}solutions"</span>
+                  ,{'\n'}
+                  {'};'}
+                </code>
+              </pre>
+            </figure>
+          </div>
         </div>
       </div>
     </section>
