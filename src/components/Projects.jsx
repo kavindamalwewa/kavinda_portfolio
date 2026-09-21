@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import useInView from '../hooks/useInView'
-import { ArrowRight, CloseIcon } from './icons/BrandIcons'
+import { ArrowRight, ChevronIcon, CloseIcon } from './icons/BrandIcons'
 import ProjectArt from './ProjectArt'
 import './Projects.css'
 
@@ -299,6 +299,8 @@ const PROJECTS = [
   },
 ]
 
+const VISIBLE = 6
+
 function ProjectCard({ project, index, onOpen }) {
   const [coverFailed, setCoverFailed] = useState(false)
   const showCover = project.cover && !coverFailed
@@ -464,18 +466,52 @@ function ProjectSheet({ project, onClose }) {
 export default function Projects() {
   const [ref, inView] = useInView()
   const [active, setActive] = useState(null)
+  const [expanded, setExpanded] = useState(false)
   const close = useCallback(() => setActive(null), [])
+
+  const hidden = PROJECTS.length - VISIBLE
+  const shown = expanded ? PROJECTS : PROJECTS.slice(0, VISIBLE)
 
   return (
     <section className="section projects" id="projects">
       <div className="shell">
-        <p className="eyebrow">Featured Projects</p>
+        <header className="sectionHead">
+          <h2 className="sectionHead__title">
+            <span className="sectionHead__accent">Projects</span>
+          </h2>
+          <span className="sectionHead__rule" aria-hidden="true" />
+        </header>
 
         <div className={`projects__grid reveal ${inView ? 'is-visible' : ''}`} ref={ref}>
-          {PROJECTS.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} onOpen={setActive} />
+          {shown.map((project, i) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              index={expanded && i >= VISIBLE ? i - VISIBLE : i}
+              onOpen={setActive}
+            />
           ))}
         </div>
+
+        {hidden > 0 && (
+          <div className="projects__more">
+            <button
+              className="showMore"
+              type="button"
+              aria-expanded={expanded}
+              onClick={() => setExpanded((v) => !v)}
+            >
+              {expanded ? 'Show less' : 'Show more'}
+              <ChevronIcon
+                className={`showMore__chevron ${expanded ? 'is-up' : ''}`}
+                aria-hidden="true"
+              />
+              <span className="sr-only">
+                {expanded ? ' — collapse to 6 projects' : ` — ${hidden} more project${hidden > 1 ? 's' : ''}`}
+              </span>
+            </button>
+          </div>
+        )}
       </div>
 
       {active && <ProjectSheet project={active} onClose={close} />}

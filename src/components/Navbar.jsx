@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CloseIcon, MenuIcon, SparkIcon } from './icons/BrandIcons'
+import { CloseIcon, CubeIcon, MenuIcon } from './icons/BrandIcons'
 import './Navbar.css'
 
 const LINKS = [
@@ -59,7 +59,7 @@ export default function Navbar({ cvHref }) {
       <div className="nav__inner">
         <a className="nav__brand" href="#home">
           <span className="nav__logo" aria-hidden="true">
-            <SparkIcon />
+            <CubeIcon />
           </span>
           <span className="nav__brandText">
             <span className="nav__name">

@@ -116,6 +116,20 @@ export const CodeGlyph = (p) => (
   </svg>
 )
 
+export const CubeIcon = (p) => (
+  <svg
+    {...wrap(p)}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M12 2.5 20.3 7.25v9.5L12 21.5 3.7 16.75v-9.5z" />
+    <path d="M12 12 3.7 7.25M12 12l8.3-4.75M12 12v9.5" />
+  </svg>
+)
+
 export const SparkIcon = (p) => (
   <svg {...wrap(p)} fill="currentColor">
     <path d="M10 5.5Q10.7 12.3 17.5 13Q10.7 13.7 10 20.5Q9.3 13.7 2.5 13Q9.3 12.3 10 5.5Z" />
