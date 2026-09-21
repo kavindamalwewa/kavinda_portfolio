@@ -1,35 +1,69 @@
 import useInView from '../hooks/useInView'
-import { BookIcon, CodeGlyph, DownloadIcon, FolderIcon } from './icons/BrandIcons'
+import {
+  CapIcon,
+  ChipIcon,
+  FolderIcon,
+  PinIcon,
+  TrophyIcon,
+  UserCheckIcon,
+} from './icons/BrandIcons'
 import './About.css'
 
-const STATS = [
-  { value: '10+', label: 'Projects Completed', Icon: FolderIcon, tone: 'blue' },
-  { value: '15+', label: 'Technologies', Icon: CodeGlyph, tone: 'cyan' },
-  { value: 'Ongoing', label: 'Always Learning', Icon: BookIcon, tone: 'violet' },
+/* Quick facts shown as chips under the bio. */
+const FACTS = [
+  { label: 'Rajarata University of Srilanka', Icon: CapIcon },
+  { label: 'Kandy, Sri Lanka', Icon: PinIcon },
+  { label: 'Open for Internships', Icon: UserCheckIcon },
 ]
 
-export default function About({ cvHref }) {
+const STATS = [
+  { value: '03+', label: 'Years Learning Journey', Icon: CapIcon, tone: 'cyan' },
+  { value: '07+', label: 'Total Projects', Icon: FolderIcon, tone: 'violet' },
+  { value: '15+', label: 'Certifications', Icon: TrophyIcon, tone: 'green' },
+  { value: '15+', label: 'Technologies', Icon: ChipIcon, tone: 'blue' },
+]
+
+export default function About() {
   const [ref, inView] = useInView()
 
   return (
     <section className="section about" id="about">
       <div className="shell">
-        <p className="eyebrow">About Me</p>
+        <header className="about__head">
+          <h2 className="about__heading">
+            About <span className="about__headingAccent">Me</span>
+          </h2>
+          <span className="about__rule" aria-hidden="true" />
+        </header>
 
-        <div className={`about__grid reveal ${inView ? 'is-visible' : ''}`} ref={ref}>
-          <div className="about__intro" style={{ '--i': 0 }}>
-            <p className="about__text">
+        <div className={`about__body reveal ${inView ? 'is-visible' : ''}`} ref={ref}>
+          <article className="whoami" style={{ '--i': 0 }}>
+            <h3 className="whoami__headline">
+              Building <span className="whoami__accent">intelligent systems</span> that
+              solve real-world problems.
+            </h3>
+
+            <p className="whoami__text">
               I am an IT undergraduate with a strong interest in Artificial
               Intelligence, Machine Learning, Software Engineering, Web
               Development, and Software Testing &amp; Quality Assurance. I enjoy
               learning, building real-world projects, and collaborating with
               others to create impactful solutions.
             </p>
-          </div>
 
-          <ul className="stats">
-            {STATS.map(({ value, label, Icon, tone }, i) => (
-              <li className={`stat stat--${tone}`} key={label} style={{ '--i': i + 1 }}>
+            <ul className="facts">
+              {FACTS.map(({ label, Icon }) => (
+                <li className="fact" key={label}>
+                  <Icon className="fact__icon" aria-hidden="true" />
+                  {label}
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <ul className="stats" style={{ '--i': 1 }}>
+            {STATS.map(({ value, label, Icon, tone }) => (
+              <li className={`stat stat--${tone}`} key={label}>
                 <span className="stat__badge">
                   <Icon className="stat__icon" aria-hidden="true" />
                 </span>

@@ -14,6 +14,7 @@ import {
   UserCheckIcon,
 } from './icons/BrandIcons'
 import './Contact.css'
+import { SOCIALS } from '../data/socials'
 
 /* ─────────────────────────────────────────────────────────────
    PLACEHOLDER DETAILS — swap these for the real ones.
@@ -25,8 +26,8 @@ const CONTACT = {
   email: 'kavinda.malwewa@example.com',
   phone: '+94 71 234 5678',
   location: 'Anuradhapura, Sri Lanka',
-  linkedin: 'https://www.linkedin.com/in/kavinda-malwewa',
-  github: 'https://github.com/kavindamalwewa',
+  linkedin: SOCIALS.linkedin,
+  github: SOCIALS.github,
 }
 
 const REFERENCES = [

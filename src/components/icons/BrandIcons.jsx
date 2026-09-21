@@ -116,6 +116,13 @@ export const CodeGlyph = (p) => (
   </svg>
 )
 
+export const SparkIcon = (p) => (
+  <svg {...wrap(p)} fill="currentColor">
+    <path d="M10 5.5Q10.7 12.3 17.5 13Q10.7 13.7 10 20.5Q9.3 13.7 2.5 13Q9.3 12.3 10 5.5Z" />
+    <path d="M18 2Q18.4 5.6 22 6Q18.4 6.4 18 10Q17.6 6.4 14 6Q17.6 5.6 18 2Z" opacity=".65" />
+  </svg>
+)
+
 export const LogoMark = (p) => (
   <svg {...wrap(p)} fill="none">
     <rect x="1.2" y="1.2" width="21.6" height="21.6" rx="6.4" stroke="url(#lm)" strokeWidth="1.6" />
@@ -249,6 +256,20 @@ export const PinIcon = (p) => (
 export const SendIcon = (p) => (
   <svg {...stroke(p)}>
     <path d="M20.5 3.5 10.8 13.2M20.5 3.5l-6.2 17-3.5-7.3-7.3-3.5z" />
+  </svg>
+)
+
+export const ExternalLinkIcon = (p) => (
+  <svg {...stroke(p)}>
+    <path d="M9 15 15 9M10 9h5v5" />
+  </svg>
+)
+
+export const ChipIcon = (p) => (
+  <svg {...stroke(p)}>
+    <rect x="7.5" y="7.5" width="9" height="9" rx="2" />
+    <rect x="4" y="4" width="16" height="16" rx="3" />
+    <path d="M9 1.8v2.2M15 1.8v2.2M9 20v2.2M15 20v2.2M1.8 9H4M1.8 15H4M20 9h2.2M20 15h2.2" />
   </svg>
 )
 

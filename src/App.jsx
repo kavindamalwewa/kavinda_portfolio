@@ -19,8 +19,8 @@ function App() {
       </a>
       <Navbar cvHref={CV_HREF} />
       <main>
-        <Hero cvHref={CV_HREF} />
-        <About cvHref={CV_HREF} />
+        <Hero />
+        <About />
         <Skills />
         <Projects />
         <Education />

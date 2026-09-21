@@ -1,9 +1,21 @@
-import { ArrowRight, CodeGlyph } from './icons/BrandIcons'
-import TechStrip from './TechStrip'
+import {
+  ArrowRight,
+  CodeGlyph,
+  ExternalLinkIcon,
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon,
+} from './icons/BrandIcons'
+import { SOCIALS } from '../data/socials'
 // Swap this file (src/assets/kavinda.png) for your own photo, or point the import
 // at a new filename — Vite hashes and bundles whatever it resolves to.
 import heroPhoto from '../assets/kavinda.png'
 import './Hero.css'
+
+const SOCIAL_LINKS = [
+  { label: 'GitHub', href: SOCIALS.github, Icon: GitHubIcon },
+  { label: 'LinkedIn', href: SOCIALS.linkedin, Icon: LinkedInIcon },
+]
 
 const ROLES = [
   'IT Undergraduate',
@@ -12,7 +24,7 @@ const ROLES = [
   'QA',
 ]
 
-export default function Hero({ cvHref }) {
+export default function Hero() {
   return (
     <section className="hero" id="home">
       {/* ambient background */}
@@ -50,9 +62,24 @@ export default function Hero({ cvHref }) {
               View My Work
               <ArrowRight className="btn__icon" aria-hidden="true" />
             </a>
+            <a className="btn btn--ghost" href="#contact">
+              Contact Me
+              <MailIcon className="btn__icon" aria-hidden="true" />
+            </a>
           </div>
 
-          <TechStrip />
+          <ul className="hero__socials">
+            {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+              <li key={label}>
+                <a className="heroSocial" href={href} target="_blank" rel="noreferrer noopener">
+                  <Icon className="heroSocial__icon" aria-hidden="true" />
+                  {label}
+                  <ExternalLinkIcon className="heroSocial__out" aria-hidden="true" />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="hero__visual">

@@ -143,6 +143,49 @@
   gap: 14px;
 }
 
+/* ── social links, under the CTA row ────────────────────── */
+.hero__socials {
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.heroSocial {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 7px 2px;
+  font-size: 14.5px;
+  color: var(--text-muted);
+  transition: color 0.22s ease;
+}
+
+.heroSocial:hover {
+  color: var(--text);
+}
+
+.heroSocial__icon {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+
+.heroSocial__out {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.heroSocial:hover .heroSocial__out {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
 /* ── right-hand visual ──────────────────────────────────── */
 .hero__visual {
   position: relative;

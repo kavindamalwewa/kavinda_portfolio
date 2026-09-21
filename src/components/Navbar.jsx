@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CloseIcon, DownloadIcon, MenuIcon } from './icons/BrandIcons'
+import { CloseIcon, MenuIcon, SparkIcon } from './icons/BrandIcons'
 import './Navbar.css'
 
 const LINKS = [
@@ -7,9 +7,7 @@ const LINKS = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
-  { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' },
-  { id: 'certifications', label: 'Certifications' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -59,6 +57,19 @@ export default function Navbar({ cvHref }) {
   return (
     <header className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="nav__inner">
+        <a className="nav__brand" href="#home">
+          <span className="nav__logo" aria-hidden="true">
+            <SparkIcon />
+          </span>
+          <span className="nav__brandText">
+            <span className="nav__name">
+              Kavinda<span className="nav__dot">.</span>
+              <span className="nav__nameAccent">Malwewa</span>
+            </span>
+            <span className="nav__tagline">B.Sc. IT Undergraduate</span>
+          </span>
+        </a>
+
         <nav className="nav__links" aria-label="Primary">
           {LINKS.map((link) => (
             <a
@@ -73,9 +84,8 @@ export default function Navbar({ cvHref }) {
         </nav>
 
         <div className="nav__actions">
-          <a className="btn btn--primary btn--sm" href={cvHref} download="Kavinda-Malwewa-CV.pdf">
+          <a className="btn btn--primary btn--sm nav__cta" href={cvHref} download="Kavinda-Malwewa-CV.pdf">
             Download CV
-            <DownloadIcon className="btn__icon" aria-hidden="true" />
           </a>
           <button
             className="nav__toggle"
@@ -106,7 +116,6 @@ export default function Navbar({ cvHref }) {
         ))}
         <a className="btn btn--primary nav__sheetCta" href={cvHref} download="Kavinda-Malwewa-CV.pdf">
           Download CV
-          <DownloadIcon className="btn__icon" aria-hidden="true" />
         </a>
       </div>
     </header>
