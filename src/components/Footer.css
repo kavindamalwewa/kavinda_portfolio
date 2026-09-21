@@ -1,0 +1,130 @@
+.footer {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(26px, 3vw, 38px) 0 clamp(18px, 2.2vw, 26px);
+  border-top: 1px solid var(--border);
+  background: #05060f;
+}
+
+/* soft brand glow bleeding up from the bottom-left */
+.footer__aura {
+  position: absolute;
+  bottom: -55%;
+  left: -10%;
+  width: min(560px, 85vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(124, 92, 255, 0.16),
+    rgba(56, 189, 248, 0.07) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.footer__inner {
+  position: relative;
+}
+
+/* ── status ── */
+.footer__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.footer__pulse {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 10px -1px #4ade80;
+}
+
+.footer__pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid #4ade80;
+  opacity: 0;
+  animation: footer-ping 2.4s ease-out infinite;
+}
+
+@keyframes footer-ping {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  70%, 100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ── base row ───────────────────────────────────────────── */
+.footer__base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: clamp(16px, 2vw, 24px);
+  padding-top: clamp(13px, 1.5vw, 18px);
+  border-top: 1px solid var(--border);
+}
+
+.footer__meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ── back to top ────────────────────────────────────────── */
+.footer__toTop {
+  position: absolute;
+  right: clamp(16px, 4vw, 40px);
+  bottom: clamp(16px, 2vw, 26px);
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  transition: transform 0.26s ease, border-color 0.26s ease, color 0.26s ease,
+    background 0.26s ease;
+}
+
+.footer__toTop:hover {
+  transform: translateY(-3px);
+  border-color: rgba(157, 123, 255, 0.6);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.footer__toTop svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── responsive ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .footer__pulse::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 620px) {
+  /* clear the floating button so it never sits on the meta text */
+  .footer__base {
+    padding-right: 58px;
+  }
+
+  .footer__meta--end {
+    max-width: 22ch;
+  }
+}

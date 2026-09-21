@@ -35,7 +35,7 @@ const COLUMNS = [
     ],
   },
   {
-    heading: 'Achievements & Certifications',
+    heading: 'Achievements & Certifications & Other Activities',
     Icon: TrophyIcon,
     tone: 'cyan',
     items: [

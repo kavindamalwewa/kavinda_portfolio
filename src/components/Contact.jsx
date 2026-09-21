@@ -3,7 +3,6 @@ import useInView from '../hooks/useInView'
 import {
   ChatIcon,
   CheckIcon,
-  ChevronIcon,
   CopyIcon,
   GitHubIcon,
   LinkedInIcon,
@@ -11,7 +10,6 @@ import {
   PhoneIcon,
   PinIcon,
   SendIcon,
-  UserCheckIcon,
 } from './icons/BrandIcons'
 import './Contact.css'
 import { SOCIALS } from '../data/socials'
@@ -23,27 +21,12 @@ import { SOCIALS } from '../data/socials'
 const CONTACT = {
   name: 'Kavinda Malwewa',
   tagline: 'B.Sc. IT Undergraduate • Rajarata University of Sri Lanka',
-  email: 'kavinda.malwewa@example.com',
-  phone: '+94 71 234 5678',
-  location: 'Anuradhapura, Sri Lanka',
+  email: 'kavindamalwewa99@gmail.com',
+  phone: '+94 742905215',
+  location: 'Kandy, Sri Lanka',
   linkedin: SOCIALS.linkedin,
   github: SOCIALS.github,
 }
-
-const REFERENCES = [
-  {
-    name: 'Dr. A. B. Perera',
-    role: 'Senior Lecturer, Faculty of Computing',
-    org: 'Rajarata University of Sri Lanka',
-    email: 'a.perera@example.ac.lk',
-  },
-  {
-    name: 'Mr. S. Fernando',
-    role: 'Software Engineering Lead',
-    org: 'Example Tech (Pvt) Ltd',
-    email: 's.fernando@example.com',
-  },
-]
 
 /** Copy-to-clipboard row with a short-lived confirmation. */
 function CopyRow({ Icon, tone, label, value, href }) {
@@ -121,7 +104,7 @@ function MessageForm() {
           type="text"
           required
           autoComplete="name"
-          placeholder="e.g. Sarah Jenkins"
+          placeholder="e.g. Udith Perera"
         />
       </label>
 
@@ -135,7 +118,7 @@ function MessageForm() {
           type="email"
           required
           autoComplete="email"
-          placeholder="e.g. sarah@example.com"
+          placeholder="e.g. udith.perera@example.com"
         />
       </label>
 
@@ -148,7 +131,7 @@ function MessageForm() {
           name="message"
           rows="5"
           required
-          placeholder="Discuss project ideas, software internship opportunities, or general inquiries..."
+          placeholder="Discuss project ideas, internship opportunities, or general inquiries..."
         />
       </label>
 
@@ -175,14 +158,15 @@ export default function Contact() {
         <header className="contact__head">
           <p className="pill">
             <ChatIcon className="pill__icon" aria-hidden="true" />
-            Let&apos;s Connect
+            Let&apos;s Talk
           </p>
           <h2 className="contact__title">
             Let&apos;s Build <span className="contact__grad">Something Amazing</span>
           </h2>
-          <p className="contact__sub">
-            Interested in hiring an IT intern, discussing a project proposal, or
-            collaborating on software/AI development?
+          <p className="contact__note">
+            Internships, academic collaborations, code review, or just a thoughtful
+            technical conversation &mdash; I read every message, and I&apos;ll reply at
+            the address you provide.
           </p>
           <span className="contact__rule" aria-hidden="true" />
         </header>
@@ -241,25 +225,6 @@ export default function Contact() {
               </p>
             </div>
 
-            <details className="refs">
-              <summary className="refs__summary">
-                <UserCheckIcon className="refs__icon" aria-hidden="true" />
-                <span className="refs__label">Academic &amp; Professional References</span>
-                <ChevronIcon className="refs__chevron" aria-hidden="true" />
-              </summary>
-              <ul className="refs__list">
-                {REFERENCES.map((r) => (
-                  <li className="ref" key={r.name}>
-                    <b className="ref__name">{r.name}</b>
-                    <span className="ref__role">{r.role}</span>
-                    <span className="ref__org">{r.org}</span>
-                    <a className="ref__mail" href={`mailto:${r.email}`}>
-                      {r.email}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </details>
           </div>
 
           <div style={{ '--i': 1 }}>

@@ -92,6 +92,12 @@ export const ArrowRight = (p) => (
   </svg>
 )
 
+export const ArrowUp = (p) => (
+  <svg {...wrap(p)} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 19.5V5M6 11l6-6 6 6" />
+  </svg>
+)
+
 export const DownloadIcon = (p) => (
   <svg {...wrap(p)} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 3v12M7 11l5 5 5-5M4 20h16" />
