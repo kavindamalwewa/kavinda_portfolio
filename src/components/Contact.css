@@ -383,10 +383,43 @@
 .msgcard__status:not(:empty) {
   padding: 10px 13px;
   border-radius: 9px;
-  border: 1px solid rgba(74, 222, 128, 0.35);
-  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.04);
   font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.msgcard__status--ok:not(:empty) {
+  border-color: rgba(74, 222, 128, 0.35);
+  background: rgba(74, 222, 128, 0.1);
   color: #86efac;
+}
+
+.msgcard__status--err:not(:empty) {
+  border-color: rgba(248, 113, 113, 0.4);
+  background: rgba(248, 113, 113, 0.1);
+  color: #fca5a5;
+}
+
+/* Honeypot: off-screen for people, tempting for bots. Not `display:none`,
+   which some bots skip over. */
+.msgcard__bot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.msgcard__send[disabled] {
+  cursor: progress;
+  filter: saturate(0.6) brightness(0.85);
+  box-shadow: none;
+}
+
+.msgcard__send[disabled]:hover {
+  transform: none;
 }
 
 /* ── responsive ─────────────────────────────────────────── */

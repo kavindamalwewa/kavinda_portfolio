@@ -18,6 +18,10 @@ import { SOCIALS } from '../data/socials'
    PLACEHOLDER DETAILS — swap these for the real ones.
    The email address here is also where the contact form sends.
    ───────────────────────────────────────────────────────────── */
+/* Web3Forms access key. Public by design — it only routes mail to the address
+   you registered, so it is safe to commit. Get one at https://web3forms.com */
+const WEB3FORMS_KEY = '7ff5ebcb-b188-4af5-870b-45375b48ce83'
+
 const CONTACT = {
   name: 'Kavinda Malwewa',
   tagline: 'B.Sc. IT Undergraduate • Rajarata University of Sri Lanka',
@@ -71,23 +75,50 @@ function CopyRow({ Icon, tone, label, value, href }) {
 
 function MessageForm() {
   const [status, setStatus] = useState(null)
+  const [sending, setSending] = useState(false)
 
-  /**
-   * No backend here: this hands the message to the visitor's mail client.
-   * To collect submissions instead, POST the `data` object to Formspree /
-   * EmailJS / your own endpoint in place of the mailto handoff below.
-   */
-  const onSubmit = (event) => {
+  /** Posts to Web3Forms, which relays the message to CONTACT.email. */
+  const onSubmit = async (event) => {
     event.preventDefault()
-    const data = Object.fromEntries(new FormData(event.currentTarget))
+    // Captured before the await: the event's currentTarget is cleared once the
+    // handler returns, so reading it after would give null.
+    const form = event.currentTarget
+    const data = new FormData(form)
 
-    const subject = `Portfolio enquiry from ${data.name}`
-    const body = `${data.message}\n\n--\n${data.name}\n${data.email}`
-    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`
+    data.append('access_key', WEB3FORMS_KEY)
+    data.append('subject', `Portfolio enquiry from ${data.get('name')}`)
+    data.append('from_name', 'Portfolio contact form')
 
-    setStatus('Opening your email app with the message ready to send.')
+    setSending(true)
+    setStatus({ tone: 'pending', text: 'Sending your message…' })
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data,
+      })
+      const result = await res.json()
+
+      if (result.success) {
+        form.reset()
+        setStatus({
+          tone: 'ok',
+          text: 'Message sent — thank you. I’ll reply to the address you gave.',
+        })
+      } else {
+        setStatus({
+          tone: 'err',
+          text: result.message || `Could not send. Please email me at ${CONTACT.email}.`,
+        })
+      }
+    } catch {
+      setStatus({
+        tone: 'err',
+        text: `Network error. Check your connection, or email me at ${CONTACT.email}.`,
+      })
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -135,13 +166,26 @@ function MessageForm() {
         />
       </label>
 
-      <button className="msgcard__send" type="submit">
+      <input
+        className="msgcard__bot"
+        type="checkbox"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
+
+      <button className="msgcard__send" type="submit" disabled={sending}>
         <SendIcon className="msgcard__sendIcon" aria-hidden="true" />
-        Send Message
+        {sending ? 'Sending…' : 'Send Message'}
       </button>
 
-      <p className="msgcard__status" role="status" aria-live="polite">
-        {status}
+      <p
+        className={`msgcard__status ${status ? `msgcard__status--${status.tone}` : ''}`}
+        role="status"
+        aria-live="polite"
+      >
+        {status?.text}
       </p>
     </form>
   )
