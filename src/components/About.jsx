@@ -17,9 +17,9 @@ const FACTS = [
 ]
 
 const STATS = [
-  { value: '03+', label: 'Years Learning Journey', Icon: CapIcon, tone: 'cyan' },
+  { value: '04+', label: 'Years Learning Journey', Icon: CapIcon, tone: 'cyan' },
   { value: '07+', label: 'Total Projects', Icon: FolderIcon, tone: 'violet' },
-  { value: '15+', label: 'Certifications', Icon: TrophyIcon, tone: 'green' },
+  { value: '04+', label: 'Certifications', Icon: TrophyIcon, tone: 'green' },
   { value: '15+', label: 'Technologies', Icon: ChipIcon, tone: 'blue' },
 ]
 
