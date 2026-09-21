@@ -203,6 +203,13 @@ export const ShieldIcon = (p) => (
   </svg>
 )
 
+export const CalendarIcon = (p) => (
+  <svg {...stroke(p)}>
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+    <path d="M3.5 9.5h17M8 3v4M16 3v4" />
+  </svg>
+)
+
 export const CapIcon = (p) => (
   <svg {...stroke(p)}>
     <path d="M2.8 9.1 12 5l9.2 4.1-9.2 4.1z" />

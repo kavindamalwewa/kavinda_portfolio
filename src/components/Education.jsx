@@ -1,95 +1,128 @@
-import { Fragment } from 'react'
 import useInView from '../hooks/useInView'
-import { CapIcon, TrophyIcon, UsersIcon } from './icons/BrandIcons'
+import { CalendarIcon, CapIcon, PinIcon, TrophyIcon } from './icons/BrandIcons'
 import './Education.css'
 
-const EDUCATION = [
+/**
+ * Each column runs its own list and can differ in length. Every field except
+ * `title` is optional, so an entry renders only what it actually has.
+ */
+const COLUMNS = [
   {
-    date: ['Present'],
-    title: 'Rajarata University of Sri Lanka',
-    lines: ['IT Undergraduate'],
+    heading: 'Education',
     Icon: CapIcon,
     tone: 'violet',
+    items: [
+      {
+        date: '2024 — Present',
+        title: 'Bachelor of Science (B.Sc.) in Information Technology',
+        institution: 'Rajarata University of Sri Lanka',
+        detail: 'Faculty of Applied Sciences • Department of Information Technology',
+        location: 'Mihintale, Sri Lanka',
+      },
+      {
+        date: '2025 - Present',
+        title: 'Bachelor of Information Technology (BIT)',
+        institution: 'University of Colombo School of Computing (UCSC)',
+        detail: 'External Degree Programme',
+        location: 'Colombo, Sri Lanka',
+      },
+      {
+        date: '2011 - 2019',
+        title: 'G.C.E. Ordinary Level & Advanced Level',
+        institution: 'Ranabima Royal College, Kandy',
+        location: 'Kandy, Sri Lanka',
+      },
+    ],
   },
   {
-    date: ['Present'],
-    title: 'University of Colombo School of Computing (UCSC)',
-    lines: ['Bachelor of Information Technology (BIT),', 'External Degree Programme'],
-    Icon: CapIcon,
-    tone: 'violet',
-  },
-]
-
-const ACHIEVEMENTS = [
-  {
-    date: ['2025'],
-    title: 'AR/VR Stall Team Leader – FASEXPLORE 2025',
-    lines: ['Led the AR/VR stall team, overseeing setup,', 'demonstrations, and visitor engagement.'],
+    heading: 'Achievements & Certifications',
     Icon: TrophyIcon,
-    tone: 'pink',
-  },
-  {
-    date: ['2023', 'Present'],
-    title: 'Committee Member – ARICT',
-    lines: ['Active member contributing to technical events,', 'workshops, and community initiatives.'],
-    Icon: UsersIcon,
-    tone: 'violet',
+    tone: 'cyan',
+    items: [
+      {
+        date: 'Jul 2026',
+        title: 'Dean’s List Award',
+        detail: 'Faculty of Applied Sciences, Rajarata University of Sri Lanka',
+      },
+      {
+        date: 'Jul 2026',
+        title: 'Agile Mastery: Empowering Teams for Project Success',
+        detail:
+          'Department of Computing, Faculty of Applied Sciences, Rajarata University of Sri Lanka',
+      },
+      {
+        date: 'Jul 2025',
+        title: 'Appreciation for Contribution to FASEXPLORE 2025',
+        detail: 'Faculty of Applied Sciences, Rajarata University of Sri Lanka',
+      },
+      {
+        date: '2025 — 2026',
+        title: 'Committee Member — ARICT',
+        detail: 'Contributing to technical events, workshops and community initiatives.',
+      },
+    ],
   },
 ]
 
-function Entry({ item, side, first, last, index }) {
-  const edges = `${first ? 'is-first' : ''} ${last ? 'is-last' : ''}`
-  if (!item) return <div className={`entry entry--empty ${edges}`} style={{ '--i': index }} />
-
-  const { Icon, tone, date, title, lines } = item
+function Item({ date, title, institution, detail, location }) {
   return (
-    <article className={`entry entry--${side} entry--${tone} ${edges}`} style={{ '--i': index }}>
-      <span className="entry__badge">
-        <Icon className="entry__icon" aria-hidden="true" />
-      </span>
-
-      <p className="entry__date">
-        {date.map((d) => (
-          <span key={d}>{d}</span>
-        ))}
-      </p>
-
-      <div className="entry__text">
-        <h3 className="entry__title">{title}</h3>
-        {lines.map((line) => (
-          <p className="entry__line" key={line}>
-            {line}
-          </p>
-        ))}
+    <li className="tItem">
+      <div className="tItem__main">
+        <h4 className="tItem__title">{title}</h4>
+        {institution && <p className="tItem__inst">{institution}</p>}
+        {detail && <p className="tItem__detail">{detail}</p>}
       </div>
-    </article>
+
+      {(date || location) && (
+        <div className="tItem__meta">
+          {date && (
+            <span className="tItem__date">
+              <CalendarIcon className="tItem__metaIcon" aria-hidden="true" />
+              {date}
+            </span>
+          )}
+          {location && (
+            <span className="tItem__loc">
+              <PinIcon className="tItem__metaIcon" aria-hidden="true" />
+              {location}
+            </span>
+          )}
+        </div>
+      )}
+    </li>
   )
 }
 
 export default function Education() {
   const [ref, inView] = useInView()
-  const rowCount = Math.max(EDUCATION.length, ACHIEVEMENTS.length)
-  const rows = Array.from({ length: rowCount }, (_, i) => i)
 
   return (
     <section className="section education" id="education">
       <div className="shell">
-        <h2 className="section__title">Education &amp; Achievements</h2>
+        <header className="sectionHead">
+          <h2 className="sectionHead__title">
+            Education &amp; <span className="sectionHead__accent">Achievements</span>
+          </h2>
+          <span className="sectionHead__rule" aria-hidden="true" />
+        </header>
 
         <div className={`edu__grid reveal ${inView ? 'is-visible' : ''}`} ref={ref}>
-          {rows.map((i) => {
-            const first = i === 0
-            const last = i === rowCount - 1
-            return (
-              <Fragment key={i}>
-                <Entry item={EDUCATION[i]} side="left" first={first} last={last} index={i} />
-                <div className="edu__node" style={{ '--i': i }}>
-                  <span className="edu__dot" />
-                </div>
-                <Entry item={ACHIEVEMENTS[i]} side="right" first={first} last={last} index={i} />
-              </Fragment>
-            )
-          })}
+          {COLUMNS.map(({ heading, Icon, tone, items }, c) => (
+            <section className={`track track--${tone}`} key={heading} style={{ '--i': c }}>
+              <h3 className="track__head">
+                <span className="track__badge" aria-hidden="true">
+                  <Icon className="track__icon" />
+                </span>
+                {heading}
+              </h3>
+
+              <ol className="track__list">
+                {items.map((item) => (
+                  <Item key={item.title} {...item} />
+                ))}
+              </ol>
+            </section>
+          ))}
         </div>
       </div>
     </section>
