@@ -29,11 +29,11 @@ export default function About() {
   return (
     <section className="section about" id="about">
       <div className="shell">
-        <header className="about__head">
-          <h2 className="about__heading">
-            About <span className="about__headingAccent">Me</span>
+        <header className="sectionHead">
+          <h2 className="sectionHead__title">
+            About <span className="sectionHead__accent">Me</span>
           </h2>
-          <span className="about__rule" aria-hidden="true" />
+          <span className="sectionHead__rule" aria-hidden="true" />
         </header>
 
         <div className={`about__body reveal ${inView ? 'is-visible' : ''}`} ref={ref}>

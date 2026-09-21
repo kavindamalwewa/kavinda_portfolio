@@ -35,6 +35,37 @@
   margin-bottom: clamp(18px, 2.4vw, 26px);
 }
 
+/* Centred section heading: white title with a gradient accent word. */
+.sectionHead {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  margin-bottom: clamp(30px, 4vw, 52px);
+}
+
+.sectionHead__title {
+  font-family: var(--display);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #fff;
+}
+
+.sectionHead__accent {
+  background: linear-gradient(100deg, var(--cyan) 0%, var(--violet-bright) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sectionHead__rule {
+  width: 82px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+}
+
 /* Scroll-reveal: children stagger in once the block enters view. */
 .reveal > * {
   opacity: 0;

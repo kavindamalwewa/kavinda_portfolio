@@ -265,6 +265,13 @@ export const ExternalLinkIcon = (p) => (
   </svg>
 )
 
+export const CloudIcon = (p) => (
+  <svg {...stroke(p)}>
+    <path d="M7 18.5a4.2 4.2 0 0 1-.4-8.4 5.6 5.6 0 0 1 10.8-1.2A3.9 3.9 0 0 1 17.6 18.5z" />
+    <path d="M12 21v-6M9.4 17.6 12 15l2.6 2.6" />
+  </svg>
+)
+
 export const ChipIcon = (p) => (
   <svg {...stroke(p)}>
     <rect x="7.5" y="7.5" width="9" height="9" rx="2" />
