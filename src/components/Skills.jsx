@@ -18,7 +18,6 @@ const GROUPS = [
       { name: 'Python', level: 4 },
       { name: 'OpenCV', level: 4 },
       { name: 'YOLO', level: 4 },
-      { name: 'Scikit-learn', level: 4 },
     ],
   },
   {

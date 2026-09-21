@@ -73,7 +73,7 @@ export default function Navbar({ cvHref }) {
         </nav>
 
         <div className="nav__actions">
-          <a className="btn btn--primary btn--sm" href={cvHref} download>
+          <a className="btn btn--primary btn--sm" href={cvHref} download="Kavinda-Malwewa-CV.pdf">
             Download CV
             <DownloadIcon className="btn__icon" aria-hidden="true" />
           </a>
@@ -104,7 +104,7 @@ export default function Navbar({ cvHref }) {
             {link.label}
           </a>
         ))}
-        <a className="btn btn--primary nav__sheetCta" href={cvHref} download>
+        <a className="btn btn--primary nav__sheetCta" href={cvHref} download="Kavinda-Malwewa-CV.pdf">
           Download CV
           <DownloadIcon className="btn__icon" aria-hidden="true" />
         </a>

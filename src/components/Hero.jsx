@@ -84,13 +84,13 @@ export default function Hero({ cvHref }) {
                   <span className="tok-op">=</span> {'{'}
                   {'\n  '}
                   <span className="tok-prop">name</span>:{' '}
-                  <span className="tok-str">"Kavinda"</span>,{'\n  '}
+                  <span className="tok-str">"Kavinda Malwewa"</span>,{'\n  '}
                   <span className="tok-prop">skills</span>: [
                   <span className="tok-str">"AI/ML"</span>,{' '}
                   <span className="tok-str">"SE"</span>,{'\n    '}
                   <span className="tok-str">"QA"</span>,{' '}
-                  <span className="tok-str">"Python"</span>,{' '}
-                  <span className="tok-str">"JS"</span>],{'\n  '}
+                  <span className="tok-str">"Software Testing"</span>,{' '}{'\n    '}
+                  <span className="tok-str">"Full Stack Developer"</span>],{'\n  '}
                   <span className="tok-prop">passion</span>:{' '}
                   <span className="tok-str">"Building intelligent{'\n    '}solutions"</span>
                   ,{'\n'}

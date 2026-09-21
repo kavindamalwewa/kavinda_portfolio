@@ -25,10 +25,6 @@ export default function About({ cvHref }) {
               learning, building real-world projects, and collaborating with
               others to create impactful solutions.
             </p>
-            <a className="btn btn--primary btn--sm about__cv" href={cvHref} download>
-              Download CV
-              <DownloadIcon className="btn__icon" aria-hidden="true" />
-            </a>
           </div>
 
           <ul className="stats">

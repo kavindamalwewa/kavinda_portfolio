@@ -7,8 +7,9 @@ import Projects from './components/Projects'
 import Skills from './components/Skills'
 import './App.css'
 
-// Drop the PDF at public/Kavinda-Malwewa-CV.pdf to make this link live.
-const CV_HREF = '/Kavinda-Malwewa-CV.pdf'
+// The CV lives at public/Kavinda-Malwewa-CV.pdf. BASE_URL (always trailing-slashed)
+// keeps the link correct if the site is ever deployed under a subpath.
+const CV_HREF = `${import.meta.env.BASE_URL}Kavinda-Malwewa-CV.pdf`
 
 function App() {
   return (
