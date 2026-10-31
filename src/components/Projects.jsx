@@ -319,7 +319,6 @@ function ProjectCard({ project, index, onOpen }) {
         ) : (
           <ProjectArt variant={project.art} />
         )}
-        {project.featured && <span className="project__badge">Featured</span>}
       </div>
 
       <div className="project__body">
