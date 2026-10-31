@@ -1,4 +1,3 @@
-import useInView from '../hooks/useInView'
 import { CalendarIcon, CapIcon, PinIcon, TrophyIcon } from './icons/BrandIcons'
 import './Education.css'
 
@@ -66,64 +65,59 @@ const COLUMNS = [
 
 function Item({ date, title, institution, detail, location }) {
   return (
-    <li className="tItem">
-      <div className="tItem__main">
-        <h4 className="tItem__title">{title}</h4>
-        {institution && <p className="tItem__inst">{institution}</p>}
-        {detail && <p className="tItem__detail">{detail}</p>}
-      </div>
-
+    <li className="eduCard card">
       {(date || location) && (
-        <div className="tItem__meta">
+        <div className="eduCard__meta">
           {date && (
-            <span className="tItem__date">
-              <CalendarIcon className="tItem__metaIcon" aria-hidden="true" />
+            <span className="eduCard__date">
+              <CalendarIcon className="eduCard__metaIcon" aria-hidden="true" />
               {date}
             </span>
           )}
           {location && (
-            <span className="tItem__loc">
-              <PinIcon className="tItem__metaIcon" aria-hidden="true" />
+            <span className="eduCard__loc">
+              <PinIcon className="eduCard__metaIcon" aria-hidden="true" />
               {location}
             </span>
           )}
         </div>
       )}
+
+      <h4 className="eduCard__title">{title}</h4>
+      {institution && <p className="eduCard__inst">{institution}</p>}
+      {detail && <p className="eduCard__detail">{detail}</p>}
     </li>
   )
 }
 
 export default function Education() {
-  const [ref, inView] = useInView()
-
   return (
     <section className="section education" id="education">
       <div className="shell">
         <header className="sectionHead">
-          <h2 className="sectionHead__title">
+          <h2 className="sectionHead__title" data-reveal>
             Education &amp; <span className="sectionHead__accent">Achievements</span>
           </h2>
-          <span className="sectionHead__rule" aria-hidden="true" />
+          <span className="sectionHead__rule" aria-hidden="true" data-line />
         </header>
 
-        <div className={`edu__grid reveal ${inView ? 'is-visible' : ''}`} ref={ref}>
-          {COLUMNS.map(({ heading, Icon, tone, items }, c) => (
-            <section className={`track track--${tone}`} key={heading} style={{ '--i': c }}>
-              <h3 className="track__head">
-                <span className="track__badge" aria-hidden="true">
-                  <Icon className="track__icon" />
-                </span>
-                {heading}
-              </h3>
+        {/* One group per column of data: a small labelled header, then a card grid. */}
+        {COLUMNS.map(({ heading, Icon, tone, items }) => (
+          <section className={`eduGroup tone-${tone}`} key={heading}>
+            <h3 className="eduGroup__head" data-reveal>
+              <span className="badge eduGroup__badge" aria-hidden="true">
+                <Icon />
+              </span>
+              {heading}
+            </h3>
 
-              <ol className="track__list">
-                {items.map((item) => (
-                  <Item key={item.title} {...item} />
-                ))}
-              </ol>
-            </section>
-          ))}
-        </div>
+            <ol className="eduGroup__grid" data-stagger>
+              {items.map((item) => (
+                <Item key={item.title} {...item} />
+              ))}
+            </ol>
+          </section>
+        ))}
       </div>
     </section>
   )

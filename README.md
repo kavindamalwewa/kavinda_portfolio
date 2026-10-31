@@ -4,8 +4,8 @@ Personal portfolio site for **Kavinda Malwewa**, an IT undergraduate at Rajarata
 University of Sri Lanka working in AI/ML, software engineering and QA.
 
 Built with React 19 and Vite 8. No UI framework, no component library and no icon
-package — the styling is hand-written CSS and every icon is inline SVG, which keeps
-the runtime dependencies down to `react` and `react-dom`.
+package — the styling is hand-written CSS and every icon is inline SVG. Beyond
+`react` and `react-dom`, the only runtime dependencies are GSAP and Lenis for motion.
 
 ## Sections
 
@@ -22,7 +22,9 @@ the runtime dependencies down to `react` and `react-dom`.
 
 - **React 19** with hooks only — no state library
 - **Vite 8** for dev server and build
-- **Plain CSS**, one stylesheet per component, with design tokens in `src/index.css`
+- **Plain CSS**, one stylesheet per component, with design tokens (dark + light) in `src/index.css`
+- **GSAP + ScrollTrigger** for the intro and scroll reveals, **Lenis** for smooth scrolling —
+  both switched off entirely under `prefers-reduced-motion`
 - **Inline SVG icons** in `src/components/icons/BrandIcons.jsx`
 - **Web3Forms** for contact form delivery
 - **ESLint 10** with the React Hooks and React Refresh plugins
@@ -47,7 +49,9 @@ src/
     icons/BrandIcons.jsx   every icon used in the site
     ProjectArt.jsx         generated SVG cover art for project cards
   data/socials.js          profile links, shared by hero and contact
-  hooks/useInView.js       IntersectionObserver hook for scroll reveals
+  hooks/useTheme.js        dark/light toggle, persisted (pre-paint script in index.html)
+  motion/usePageMotion.js  all animation, driven by data-* attributes on elements
+  motion/scroll.js         Lenis handle, scroll lock for dialogs, back-to-top
   index.css                design tokens, resets, global utilities
   App.jsx                  section order
 ```

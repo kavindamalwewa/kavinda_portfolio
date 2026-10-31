@@ -1,139 +1,84 @@
-/* Doubled up on the class so this wins over the generic `.section` padding. */
-.section.skills {
-  padding-top: clamp(20px, 2.4vw, 32px);
-  background: #070819;
-}
-
+/* Even grid: three equal cards a row (two on tablets, one on phones).
+   Cards in a row share the row's height; the last one sits on its own. */
 .skills__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
   gap: clamp(14px, 1.6vw, 20px);
 }
 
-/* ── card ───────────────────────────────────────────────── */
 .skillcard {
-  --tone: #a855f7;
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 1.8vw, 22px);
-  padding: clamp(18px, 2vw, 24px);
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  background:
-    radial-gradient(85% 120% at 100% 0%, color-mix(in srgb, var(--tone) 9%, transparent), transparent 62%),
-    rgba(255, 255, 255, 0.022);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  gap: 20px;
+  padding: clamp(20px, 2vw, 26px);
+  transition: translate 0.35s var(--ease-out), border-color 0.3s ease;
 }
-
-.skillcard--violet { --tone: #a855f7; }
-.skillcard--blue { --tone: #3b82f6; }
-.skillcard--cyan { --tone: #38bdf8; }
-.skillcard--green { --tone: #22c55e; }
-.skillcard--amber { --tone: #f59e0b; }
-.skillcard--fuchsia { --tone: #d946ef; }
-.skillcard--indigo { --tone: #6366f1; }
 
 .skillcard:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--tone) 48%, transparent);
-  box-shadow: 0 24px 48px -26px color-mix(in srgb, var(--tone) 75%, transparent);
+  translate: 0 -4px;
+  border-color: var(--accent);
 }
 
-/* ── head ── */
 .skillcard__head {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 14px;
 }
 
 .skillcard__badge {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-  border-radius: 13px;
-  border: 1px solid color-mix(in srgb, var(--tone) 42%, transparent);
-  background: color-mix(in srgb, var(--tone) 14%, transparent);
-  color: var(--tone);
-}
-
-.skillcard__icon {
-  width: 21px;
-  height: 21px;
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--tone) 65%, transparent));
+  border: 1px solid var(--line);
 }
 
 .skillcard__title {
-  font-size: clamp(14.5px, 1.2vw, 16.5px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  color: #fff;
+  font-size: 1.625rem;
+  font-weight: 400;
+  line-height: 1.15;
 }
 
+/* Small uppercase track label under the title. */
 .skillcard__role {
-  margin-top: 3px;
+  margin-top: 4px;
   font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--tone) 62%, #fff);
+  color: var(--accent-ink);
 }
 
-/* ── chips ── */
+.skillcard__role:empty {
+  display: none;
+}
+
 .skillcard__list {
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-start;
   gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.chip {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-  padding: 8px 13px;
-  border-radius: 9px;
-  border: 1px solid var(--border-strong);
-  background: rgba(255, 255, 255, 0.032);
-  font-size: 12.5px;
-  color: var(--text-muted);
-  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
-}
-
 .skillcard:hover .chip {
-  border-color: color-mix(in srgb, var(--tone) 34%, transparent);
-  color: var(--text);
-}
-
-.chip:hover {
-  background: color-mix(in srgb, var(--tone) 16%, transparent);
-  border-color: color-mix(in srgb, var(--tone) 60%, transparent);
-  color: #fff;
+  border-color: var(--line-strong);
 }
 
 .chip__note {
-  font-size: 10.5px;
-  color: var(--text-dim);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: var(--tint);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-ink);
 }
 
-.chip__note::before {
-  content: '· ';
-}
-
-/* ── responsive ─────────────────────────────────────────── */
-@media (max-width: 980px) {
+@media (max-width: 1024px) {
   .skills__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 640px) {
   .skills__grid {
     grid-template-columns: 1fr;
   }

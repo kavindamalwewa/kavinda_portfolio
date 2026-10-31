@@ -1,4 +1,4 @@
-import useInView from '../hooks/useInView'
+import Words from './Words'
 import {
   CapIcon,
   ChipIcon,
@@ -24,26 +24,28 @@ const STATS = [
 ]
 
 export default function About() {
-  const [ref, inView] = useInView()
-
   return (
     <section className="section about" id="about">
       <div className="shell">
         <header className="sectionHead">
-          <h2 className="sectionHead__title">
+          <h2 className="sectionHead__title" data-reveal>
             About <span className="sectionHead__accent">Me</span>
           </h2>
-          <span className="sectionHead__rule" aria-hidden="true" />
+          <span className="sectionHead__rule" aria-hidden="true" data-line />
         </header>
 
-        <div className={`about__body reveal ${inView ? 'is-visible' : ''}`} ref={ref}>
-          <article className="whoami" style={{ '--i': 0 }}>
-            <h3 className="whoami__headline">
-              Building <span className="whoami__accent">intelligent systems</span> that
-              solve real-world problems.
+        <div className="about__body">
+          <article className="whoami">
+            {/* Words brighten one by one as the headline scrolls through. */}
+            <h3 className="whoami__headline" data-words>
+              <Words>Building</Words>{' '}
+              <span className="whoami__accent">
+                <Words>intelligent systems</Words>
+              </span>{' '}
+              <Words>that solve real-world problems.</Words>
             </h3>
 
-            <p className="whoami__text">
+            <p className="whoami__text" data-reveal>
               I am an IT undergraduate with a strong interest in Artificial
               Intelligence, Machine Learning, Software Engineering, Web
               Development, and Software Testing &amp; Quality Assurance. I enjoy
@@ -51,7 +53,7 @@ export default function About() {
               others to create impactful solutions.
             </p>
 
-            <ul className="facts">
+            <ul className="facts" data-stagger>
               {FACTS.map(({ label, Icon }) => (
                 <li className="fact" key={label}>
                   <Icon className="fact__icon" aria-hidden="true" />
@@ -61,13 +63,15 @@ export default function About() {
             </ul>
           </article>
 
-          <ul className="stats" style={{ '--i': 1 }}>
+          <ul className="stats" data-stagger>
             {STATS.map(({ value, label, Icon, tone }) => (
-              <li className={`stat stat--${tone}`} key={label}>
-                <span className="stat__badge">
+              <li className={`stat card tone-${tone}`} key={label}>
+                <span className="badge stat__badge">
                   <Icon className="stat__icon" aria-hidden="true" />
                 </span>
-                <span className="stat__value">{value}</span>
+                <span className="stat__value" data-count>
+                  {value}
+                </span>
                 <span className="stat__label">{label}</span>
               </li>
             ))}

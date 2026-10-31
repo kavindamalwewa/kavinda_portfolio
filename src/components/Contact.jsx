@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import useInView from '../hooks/useInView'
 import {
   ChatIcon,
   CheckIcon,
@@ -51,8 +50,8 @@ function CopyRow({ Icon, tone, label, value, href }) {
   }
 
   return (
-    <div className={`inforow inforow--${tone}`}>
-      <span className="inforow__badge">
+    <div className={`inforow tone-${tone}`}>
+      <span className="badge inforow__badge">
         <Icon className="inforow__icon" aria-hidden="true" />
       </span>
       <span className="inforow__text">
@@ -122,7 +121,7 @@ function MessageForm() {
   }
 
   return (
-    <form className="msgcard" onSubmit={onSubmit}>
+    <form className="msgcard card" onSubmit={onSubmit}>
       <h3 className="msgcard__title">Send Me a Message</h3>
 
       <label className="field">
@@ -175,7 +174,7 @@ function MessageForm() {
         aria-hidden="true"
       />
 
-      <button className="msgcard__send" type="submit" disabled={sending}>
+      <button className="btn btn--primary btn--lg msgcard__send" type="submit" disabled={sending}>
         <SendIcon className="msgcard__sendIcon" aria-hidden="true" />
         {sending ? 'Sending…' : 'Send Message'}
       </button>
@@ -192,87 +191,87 @@ function MessageForm() {
 }
 
 export default function Contact() {
-  const [ref, inView] = useInView()
-
   return (
     <section className="section contact" id="contact">
-      <div className="contact__glow" aria-hidden="true" />
-
       <div className="shell">
-        <header className="contact__head">
-          <p className="pill">
-            <ChatIcon className="pill__icon" aria-hidden="true" />
-            Let&apos;s Talk
-          </p>
-          <h2 className="contact__title">
-            Let&apos;s Build <span className="contact__grad">Something Amazing</span>
-          </h2>
-          <p className="contact__note">
-            Internships, academic collaborations, code review, or just a thoughtful
-            technical conversation &mdash; I read every message, and I&apos;ll reply at
-            the address you provide.
-          </p>
-          <span className="contact__rule" aria-hidden="true" />
-        </header>
+        {/* Deep band that widens into place as it scrolls up. */}
+        <div className="contact__band" data-band>
+          <span className="contact__glow" aria-hidden="true" />
 
-        <div className={`contact__grid reveal ${inView ? 'is-visible' : ''}`} ref={ref}>
-          <div className="contact__left" style={{ '--i': 0 }}>
-            <div className="infocard">
-              <h3 className="infocard__name">{CONTACT.name}</h3>
-              <p className="infocard__tagline">{CONTACT.tagline}</p>
+          <header className="contact__head" data-stagger>
+            <p className="pill">
+              <ChatIcon className="pill__icon" aria-hidden="true" />
+              Let&apos;s Talk
+            </p>
+            <h2 className="contact__title">
+              Let&apos;s Build <span className="contact__grad">Something Amazing</span>
+            </h2>
+            <p className="contact__note">
+              Internships, academic collaborations, code review, or just a thoughtful
+              technical conversation &mdash; I read every message, and I&apos;ll reply at
+              the address you provide.
+            </p>
+            <span className="contact__rule" aria-hidden="true" />
+          </header>
 
-              <CopyRow
-                Icon={MailIcon}
-                tone="cyan"
-                label="Email address"
-                value={CONTACT.email}
-                href={`mailto:${CONTACT.email}`}
-              />
-              <CopyRow
-                Icon={PhoneIcon}
-                tone="violet"
-                label="Phone number"
-                value={CONTACT.phone}
-                href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
-              />
+          <div className="contact__grid" data-stagger>
+            <div className="contact__left">
+              <div className="infocard card">
+                <h3 className="infocard__name">{CONTACT.name}</h3>
+                <p className="infocard__tagline">{CONTACT.tagline}</p>
 
-              <div className="infocard__socials">
-                <a
-                  className="social"
-                  href={CONTACT.linkedin}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <LinkedInIcon className="social__icon" aria-hidden="true" />
-                  <span className="social__text">
-                    <b>LinkedIn</b>
-                    <i>Connect</i>
-                  </span>
-                </a>
-                <a
-                  className="social"
-                  href={CONTACT.github}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <GitHubIcon className="social__icon" aria-hidden="true" />
-                  <span className="social__text">
-                    <b>GitHub</b>
-                    <i>Projects</i>
-                  </span>
-                </a>
+                <CopyRow
+                  Icon={MailIcon}
+                  tone="cyan"
+                  label="Email address"
+                  value={CONTACT.email}
+                  href={`mailto:${CONTACT.email}`}
+                />
+                <CopyRow
+                  Icon={PhoneIcon}
+                  tone="violet"
+                  label="Phone number"
+                  value={CONTACT.phone}
+                  href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
+                />
+
+                <div className="infocard__socials">
+                  <a
+                    className="social"
+                    href={CONTACT.linkedin}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <LinkedInIcon className="social__icon" aria-hidden="true" />
+                    <span className="social__text">
+                      <b>LinkedIn</b>
+                      <i>Connect</i>
+                    </span>
+                  </a>
+                  <a
+                    className="social"
+                    href={CONTACT.github}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <GitHubIcon className="social__icon" aria-hidden="true" />
+                    <span className="social__text">
+                      <b>GitHub</b>
+                      <i>Projects</i>
+                    </span>
+                  </a>
+                </div>
+
+                <p className="infocard__location">
+                  <PinIcon className="infocard__pin" aria-hidden="true" />
+                  Location: {CONTACT.location}
+                </p>
               </div>
-
-              <p className="infocard__location">
-                <PinIcon className="infocard__pin" aria-hidden="true" />
-                Location: {CONTACT.location}
-              </p>
             </div>
 
-          </div>
-
-          <div style={{ '--i': 1 }}>
-            <MessageForm />
+            <div>
+              <MessageForm />
+            </div>
           </div>
         </div>
       </div>
