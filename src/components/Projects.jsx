@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import useInView from '../hooks/useInView'
+import { lockScroll, unlockScroll } from '../motion/scroll'
 import { ArrowRight, ChevronIcon, CloseIcon } from './icons/BrandIcons'
 import ProjectArt from './ProjectArt'
 import './Projects.css'
+
+// Cover images live in public/projects/. BASE_URL keeps them working under a subpath.
+const cover = (slug) => `${import.meta.env.BASE_URL}projects/${slug}.webp`
 
 /**
  * `cover`: point at a real screenshot (e.g. '/projects/floorplan-ai.jpg' in
@@ -45,7 +48,7 @@ const PROJECTS = [
     art: 'rooms',
     tone: 'violet',
     featured: true,
-    cover: null,
+    cover: cover('floorplan-ai'),
     href: null,
   },
   {
@@ -100,7 +103,7 @@ const PROJECTS = [
     tags: ['Python', 'Algorithms', 'Automation', 'JSON'],
     art: 'layout',
     tone: 'amber',
-    cover: null,
+    cover: cover('sparkshift'),
     href: null,
   },
   {
@@ -149,7 +152,7 @@ const PROJECTS = [
     tags: ['Python', 'OpenCV', 'Computer Vision', 'Image Processing'],
     art: 'growth',
     tone: 'green',
-    cover: null,
+    cover: cover('plant-growth'),
     href: null,
   },
   {
@@ -202,7 +205,7 @@ const PROJECTS = [
     tags: ['Android', 'Java', 'SQLite', 'Mobile Development'],
     art: 'mobile',
     tone: 'cyan',
-    cover: null,
+    cover: cover('fitnote'),
     href: null,
   },
   {
@@ -233,7 +236,7 @@ const PROJECTS = [
     tags: ['Python', 'Machine Learning', 'AI', 'Image Classification'],
     art: 'classify',
     tone: 'rose',
-    cover: null,
+    cover: cover('image-classifier'),
     href: null,
   },
   {
@@ -262,7 +265,7 @@ const PROJECTS = [
     tags: ['C++', 'OOP', 'Desktop Application'],
     art: 'organizer',
     tone: 'indigo',
-    cover: null,
+    cover: cover('personal-organizer'),
     href: null,
   },
   {
@@ -294,32 +297,35 @@ const PROJECTS = [
     tags: ['JavaScript', 'HTML', 'CSS', 'Game Development'],
     art: 'game',
     tone: 'teal',
-    cover: null,
+    cover: cover('browser-game'),
     href: null,
   },
 ]
 
 const VISIBLE = 6
 
-function ProjectCard({ project, index, onOpen }) {
+function ProjectCard({ project, index, extra, onOpen }) {
   const [coverFailed, setCoverFailed] = useState(false)
   const showCover = project.cover && !coverFailed
+  const modifiers = extra ? ' project--extra' : ''
 
   return (
-    <article className={`project project--${project.tone}`} style={{ '--i': index }}>
+    <article className={`project card tone-${project.tone}${modifiers}`} style={{ '--i': index }}>
       <div className="project__media">
         {showCover ? (
           <img
             className="project__cover"
             src={project.cover}
             alt=""
+            width="1600"
+            height="1000"
             loading="lazy"
+            decoding="async"
             onError={() => setCoverFailed(true)}
           />
         ) : (
           <ProjectArt variant={project.art} />
         )}
-        {project.featured && <span className="project__badge">Featured</span>}
       </div>
 
       <div className="project__body">
@@ -378,8 +384,7 @@ function ProjectSheet({ project, onClose }) {
   // Restore focus to whatever opened the sheet, and keep the page behind it still.
   useEffect(() => {
     const opener = document.activeElement
-    const { overflow } = document.body.style
-    document.body.style.overflow = 'hidden'
+    lockScroll('project-sheet')
     panelRef.current?.focus()
 
     const onKey = (e) => {
@@ -389,15 +394,16 @@ function ProjectSheet({ project, onClose }) {
 
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = overflow
+      unlockScroll('project-sheet')
       if (opener instanceof HTMLElement) opener.focus()
     }
   }, [onClose])
 
   return (
-    <div className="sheet" role="presentation" onClick={onClose}>
+    // data-lenis-prevent: the dialog scrolls natively while the page stays put.
+    <div className="sheet" role="presentation" onClick={onClose} data-lenis-prevent>
       <div
-        className={`sheet__panel sheet__panel--${project.tone}`}
+        className={`sheet__panel tone-${project.tone}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="sheet-title"
@@ -406,7 +412,11 @@ function ProjectSheet({ project, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sheet__media">
-          <ProjectArt variant={project.art} />
+          {project.cover ? (
+            <img className="sheet__cover" src={project.cover} alt="" width="1600" height="1000" />
+          ) : (
+            <ProjectArt variant={project.art} />
+          )}
           <button className="sheet__close" type="button" onClick={onClose} aria-label="Close details">
             <CloseIcon aria-hidden="true" />
           </button>
@@ -464,7 +474,6 @@ function ProjectSheet({ project, onClose }) {
 }
 
 export default function Projects() {
-  const [ref, inView] = useInView()
   const [active, setActive] = useState(null)
   const [expanded, setExpanded] = useState(false)
   const close = useCallback(() => setActive(null), [])
@@ -476,18 +485,20 @@ export default function Projects() {
     <section className="section projects" id="projects">
       <div className="shell">
         <header className="sectionHead">
-          <h2 className="sectionHead__title">
+          <h2 className="sectionHead__title" data-reveal>
             <span className="sectionHead__accent">Projects</span>
           </h2>
-          <span className="sectionHead__rule" aria-hidden="true" />
+          <span className="sectionHead__rule" aria-hidden="true" data-line />
         </header>
 
-        <div className={`projects__grid reveal ${inView ? 'is-visible' : ''}`} ref={ref}>
+        {/* The first six fade up on scroll; cards revealed by "Show more" animate in via CSS. */}
+        <div className="projects__grid" data-stagger>
           {shown.map((project, i) => (
             <ProjectCard
               key={project.title}
               project={project}
               index={expanded && i >= VISIBLE ? i - VISIBLE : i}
+              extra={i >= VISIBLE}
               onOpen={setActive}
             />
           ))}
@@ -496,7 +507,7 @@ export default function Projects() {
         {hidden > 0 && (
           <div className="projects__more">
             <button
-              className="showMore"
+              className="btn btn--ghost showMore"
               type="button"
               aria-expanded={expanded}
               onClick={() => setExpanded((v) => !v)}

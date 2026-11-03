@@ -1,4 +1,3 @@
-import useInView from '../hooks/useInView'
 import {
   BrainIcon,
   CloudIcon,
@@ -74,23 +73,21 @@ const GROUPS = [
 const asItem = (item) => (typeof item === 'string' ? { name: item } : item)
 
 export default function Skills() {
-  const [ref, inView] = useInView()
-
   return (
     <section className="section skills" id="skills">
       <div className="shell">
         <header className="sectionHead">
-          <h2 className="sectionHead__title">
+          <h2 className="sectionHead__title" data-reveal>
             Skills &amp; <span className="sectionHead__accent">Tools</span>
           </h2>
-          <span className="sectionHead__rule" aria-hidden="true" />
+          <span className="sectionHead__rule" aria-hidden="true" data-line />
         </header>
 
-        <div className={`skills__grid reveal ${inView ? 'is-visible' : ''}`} ref={ref}>
-          {GROUPS.map(({ title, role, Icon, tone, items }, i) => (
-            <article className={`skillcard skillcard--${tone}`} key={title} style={{ '--i': i }}>
+        <div className="skills__grid" data-stagger>
+          {GROUPS.map(({ title, role, Icon, tone, items }) => (
+            <article className={`skillcard card tone-${tone}`} key={title}>
               <div className="skillcard__head">
-                <span className="skillcard__badge" aria-hidden="true">
+                <span className="badge skillcard__badge" aria-hidden="true">
                   <Icon className="skillcard__icon" />
                 </span>
                 <div>

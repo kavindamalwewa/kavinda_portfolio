@@ -1,50 +1,132 @@
-/* ── Design tokens ─────────────────────────────────────────── */
+/* ── Design tokens ───────────────────────────────────────────
+   madhushan.me's palette: warm near-black / warm off-white, a lime
+   accent (#c8ff3d) and an ember orange (#ff5c2b) used sparingly.
+   Lime is a fill colour; on the light theme, accent *text* switches
+   to the site's olive (#4d6b00) so it stays readable on white.
+
+   Dark is the default, as on madhushan.me; `html.light` swaps every
+   token, so components only ever read variables. */
 :root {
-  /* surfaces */
-  --bg: #05060f;
-  --bg-soft: #0a0c1c;
-  --surface: rgba(255, 255, 255, 0.035);
-  --surface-2: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.16);
+  /* light theme values — dark overrides below */
+  --page: #fafaf8;
+  --surface: #ffffff;
+  --surface-2: #f3f3f0;
+  --hover: #ecece8;
+  --wash: #ecece8; /* the portrait arch */
+  --tint: #8cb41424; /* soft lime: icon tiles, focus halos */
+  --deep: #c8ff3d; /* the lime contact band */
+  --scrim: #ecece8;
+  --line: #dedbd2;
+  --line-strong: #a5a49c;
+  --field-line: #8a8981; /* input borders: ≥3:1 against the field */
+  --field-bg: #ffffff;
+  --placeholder: #8a8981;
 
   /* text */
-  --text: #e8eaf5;
-  --text-muted: #9aa3bd;
-  --text-dim: #6c7691;
+  --ink: #0d0e0f;
+  --ink-2: #2b2c2e;
+  --muted: #5a5b5e;
+  --on-ink: #fafaf8;
+  --on-deep: #0a0b08;
+  --deep-muted: #44483a;
 
   /* brand */
-  --violet: #7c5cff;
-  --violet-bright: #9d7bff;
-  --blue: #3b82f6;
-  --cyan: #38bdf8;
-  --pink: #e246c8;
-  --grad: linear-gradient(100deg, var(--violet) 0%, #6366f1 45%, var(--cyan) 100%);
-  --grad-btn: linear-gradient(100deg, #6d4aff 0%, #4f6ef7 100%);
+  --primary: #0d0e0f; /* black buttons with lime text */
+  --primary-hover: #2b2c2e;
+  --on-primary: #c8ff3d;
+  --accent: #4d6b00;
+  --accent-ink: #4d6b00;
+  --band-accent: #4d6b00;
+  --band-line: #0a0b08;
+  --status: #6f8f10;
 
-  /* effects */
-  --glow: 0 0 0 1px rgba(124, 92, 255, 0.28), 0 18px 45px -12px rgba(88, 60, 220, 0.55);
-  --ring: 0 0 0 3px rgba(124, 92, 255, 0.35);
+  /* feature tiles (lead skills card, featured project): reversed */
+  --feature-bg: #0d0e0f;
+  --feature-ink: #fafaf8;
+  --feature-muted: #a5a49c;
+  --feature-line: #2b2c2e;
+  --feature-tint: #c8ff3d;
+  --feature-tone: #0d0e0f;
 
-  /* type */
-  --sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
-  --display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  /* effects: flat, like madhushan.me */
+  --shadow: none;
+  --shadow-lg: none;
+  --glow: #c8ff3d;
+  --glow-opacity: 0;
+
+  /* type — the three families of madhushan.me:
+     display serif, body sans, and a mono for small uppercase labels */
+  --font: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  /* shape + motion */
+  --radius-card: 1.75rem;
+  --radius-tile: 1.5rem;
+  --radius-field: 0.875rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
 
   /* layout */
-  --shell: 1220px;
-  --nav-h: 74px;
+  --shell: 1240px;
+  --gutter: clamp(20px, 4.4vw, 56px);
+  --nav-h: 80px;
 
-  color-scheme: dark;
-  font-family: var(--sans);
+  color-scheme: light;
+  font-family: var(--font);
   font-size: 16px;
   line-height: 1.6;
-  color: var(--text);
+  color: var(--ink);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root.dark {
+  --page: #08090a;
+  --surface: #0e0f10;
+  --surface-2: #141516;
+  --hover: #1c1d1e;
+  --wash: #141516;
+  --tint: #c8ff3d1f;
+  --deep: #c8ff3d;
+  --scrim: #050506;
+  --line: #232527;
+  --line-strong: #4a4c4e;
+  --field-line: #707270;
+  --field-bg: #08090a;
+  --placeholder: #707270;
+
+  --ink: #f2f1ee;
+  --ink-2: #cfcec9;
+  --muted: #96968f;
+  --on-ink: #08090a;
+  --on-deep: #0a0b08;
+  --deep-muted: #44483a;
+
+  --primary: #c8ff3d; /* lime buttons with near-black text */
+  --primary-hover: #a3d128;
+  --on-primary: #0a0b08;
+  --accent: #c8ff3d;
+  --accent-ink: #c8ff3d;
+  --band-accent: #4d6b00;
+  --band-line: #0a0b08;
+  --status: #c8ff3d;
+
+  --feature-bg: #c8ff3d;
+  --feature-ink: #0a0b08;
+  --feature-muted: #44483a;
+  --feature-line: #a3d128;
+  --feature-tint: #0a0b08;
+  --feature-tone: #c8ff3d;
+
+
+  --glow: #c8ff3d;
+  --glow-opacity: 0;
+
+  color-scheme: dark;
 }
 
 *,
@@ -54,23 +136,47 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-h) + 16px);
+  /* keeps the layout still when a dialog locks scrolling */
+  scrollbar-gutter: stable;
+}
+
+/* Native smooth scroll only when Lenis is not driving the page. */
+html:not(.lenis) {
+  scroll-behavior: smooth;
+}
+
+/* Lenis essentials (its stock overflow:clip lock is left out on purpose —
+   locking is handled in src/motion/scroll.js so the gutter stays stable). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 body {
   margin: 0;
   min-height: 100svh;
-  background: var(--bg);
+  background: var(--page);
+  color: var(--ink);
   overflow-x: hidden;
+  letter-spacing: -0.011em;
+  font-feature-settings: 'cv11', 'ss01';
 }
 
+/* Headings are set in the display serif, tightly tracked. */
 h1,
 h2,
-h3 {
-  font-family: var(--display);
-  color: #fff;
+h3,
+h4 {
   margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
   line-height: 1.05;
 }
 
@@ -89,6 +195,7 @@ button {
   border: 0;
   background: none;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 img,
@@ -98,25 +205,90 @@ svg {
 }
 
 :focus-visible {
-  outline: 2px solid var(--violet-bright);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 ::selection {
-  background: rgba(124, 92, 255, 0.4);
-  color: #fff;
+  background: var(--deep);
+  color: var(--on-deep);
 }
 
-/* thin, dark scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(124, 92, 255, 0.5) transparent;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+/* ── Ambient glow orbs ──────────────────────────────────────
+   Kept switchable; off for both themes to match madhushan.me's flat look. */
+.glows {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  opacity: var(--glow-opacity);
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, var(--glow), transparent);
+  will-change: transform;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.glow[data-anim='A'] {
+  animation-name: glowA;
+}
+
+.glow[data-anim='B'] {
+  animation-name: glowB;
+}
+
+.glow[data-anim='C'] {
+  animation-name: glowC;
+}
+
+@keyframes glowA {
+  from {
+    transform: translate(0) scale(1);
+  }
+  to {
+    transform: translate(14vw, 10vh) scale(1.25);
+  }
+}
+
+@keyframes glowB {
+  from {
+    transform: translate(0) scale(1.15);
+  }
+  to {
+    transform: translate(-12vw, 14vh) scale(0.9);
+  }
+}
+
+@keyframes glowC {
+  from {
+    transform: translate(-8vw, 8vh) scale(0.95);
+  }
+  to {
+    transform: translate(10vw, -10vh) scale(1.2);
+  }
+}
+
+/* Theme switch cross-fade (View Transitions, where supported). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: auto !important;
   }
   *,
   *::before,
@@ -124,6 +296,9 @@ svg {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+  .glow {
+    animation: none;
   }
 }
 

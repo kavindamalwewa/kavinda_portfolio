@@ -2,213 +2,316 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 60;
-  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
   border-bottom: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.nav.is-scrolled {
-  background: rgba(6, 8, 20, 0.72);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border-bottom-color: var(--border);
+/* While the mobile menu is open the bar becomes an opaque full-width sheet. */
+.nav.is-menu {
+  background: var(--page);
+  border-bottom-color: var(--line);
 }
 
 .nav__inner {
-  max-width: var(--shell);
-  min-height: var(--nav-h);
+  max-width: calc(var(--shell) + var(--gutter) * 2);
+  height: var(--nav-h);
   margin-inline: auto;
-  padding: 0 clamp(16px, 4vw, 40px);
-  display: flex;
+  padding-inline: var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  gap: 24px;
+  gap: 20px;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  transition: max-width 0.5s var(--ease-out), height 0.5s var(--ease-out), margin 0.5s var(--ease-out),
+    padding 0.5s var(--ease-out), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ── floating bar, once the page scrolls ──
+   The full-width header lifts into an inset, frosted pill; the brand shrinks
+   to its mark and the CV button to a round icon. */
+.nav.is-solid:not(.is-menu) .nav__inner {
+  /* About two-thirds of the screen, never narrower than the links need. */
+  max-width: min(calc(100% - 2 * var(--gutter)), clamp(840px, 67vw, 1280px));
+  height: 64px;
+  margin-top: 12px;
+  padding-inline: 10px 10px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  border-color: var(--line);
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+.nav.is-solid:not(.is-menu) .nav__links {
+  border-color: transparent;
+  background: transparent;
+}
+
+.nav__brandText {
+  max-width: 320px;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-width 0.5s var(--ease-out);
+}
+
+/* Fade the name out and give its space back, leaving just the mark. */
+.nav.is-solid:not(.is-menu) .nav__brandText {
+  max-width: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav__ctaIcon {
+  display: none;
+  width: 18px;
+  height: 18px;
+}
+
+.nav.is-solid:not(.is-menu) .nav__cta {
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.nav.is-solid:not(.is-menu) .nav__ctaText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.nav.is-solid:not(.is-menu) .nav__ctaIcon {
+  display: block;
 }
 
 /* ── brand ── */
 .nav__brand {
+  justify-self: start;
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-shrink: 0;
+  min-width: 0;
+  border-radius: 14px;
 }
 
 .nav__logo {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 13px;
-  border: 1px solid rgba(157, 123, 255, 0.4);
-  background: linear-gradient(145deg, rgba(124, 92, 255, 0.3), rgba(56, 189, 248, 0.18));
-  color: #c4b3ff;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-spring);
 }
 
 .nav__brand:hover .nav__logo {
-  transform: translateY(-1px);
-  border-color: rgba(157, 123, 255, 0.75);
+  transform: rotate(-8deg) scale(1.05);
 }
 
-.nav__logo svg {
-  width: 25px;
-  height: 25px;
-  filter: drop-shadow(0 0 7px rgba(157, 123, 255, 0.55));
-  transition: filter 0.25s ease;
-}
-
-.nav__brand:hover .nav__logo svg {
-  filter: drop-shadow(0 0 11px rgba(157, 123, 255, 0.85));
+.nav__logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
 }
 
 .nav__brandText {
   display: grid;
-  gap: 6px;
+  gap: 4px;
+  min-width: 0;
   line-height: 1.1;
 }
 
 .nav__name {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #fff;
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
   white-space: nowrap;
 }
 
 .nav__dot {
-  color: var(--cyan);
+  color: var(--accent);
 }
 
 .nav__nameAccent {
-  background: linear-gradient(100deg, var(--cyan) 0%, #7dd3fc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--ink-2);
 }
 
 .nav__tagline {
   font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--ink-2);
   white-space: nowrap;
 }
 
-/* ── desktop links, held in a pill ── */
+/* ── centred pill navigation ── */
 .nav__links {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin-inline: auto;
-  padding: 6px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  background: var(--page);
+  font-size: 0.75rem;
+}
+
+/* The ink highlight that slides to the active link. */
+.nav__pill {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: calc(100% - 8px);
+  width: 0;
+  border-radius: 9999px;
+  background: var(--primary);
+  pointer-events: none;
+}
+
+.nav__pill.is-ready {
+  transition: transform 0.5s var(--ease-spring), width 0.5s var(--ease-spring);
 }
 
 .nav__link {
+  font-family: var(--mono);
   position: relative;
-  padding: 9px 16px;
-  border-radius: 999px;
-  font-size: 14.5px;
-  color: var(--text-muted);
-  transition: color 0.2s ease, background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  height: 2.25rem;
+  padding: 0 1rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
   white-space: nowrap;
+  transition: color 0.25s ease, background-color 0.2s ease;
 }
 
-.nav__link:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.05);
+.nav__link:hover:not(.is-active) {
+  background: var(--hover);
+  color: var(--ink);
 }
 
 .nav__link.is-active {
-  color: #fff;
-  background: linear-gradient(140deg, rgba(56, 189, 248, 0.26), rgba(124, 92, 255, 0.26));
-  box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.42);
+  color: var(--on-primary);
 }
 
+/* ── actions ── */
 .nav__actions {
+  justify-self: end;
   display: flex;
-  margin-left: auto;
   align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
+  gap: 8px;
 }
 
-.nav__cta {
-  padding: 11px 20px;
-  border-radius: 999px;
-  background: linear-gradient(100deg, var(--cyan) 0%, #6d4aff 100%);
-  box-shadow: 0 10px 26px -10px rgba(56, 189, 248, 0.8);
+.nav__iconBtn {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--page);
+  color: var(--ink);
+  transition: background-color 0.2s ease, transform 0.2s var(--ease-spring);
 }
 
-.nav__cta:hover {
-  box-shadow: 0 16px 34px -10px rgba(109, 74, 255, 0.95);
+.nav__iconBtn:hover {
+  background: var(--hover);
+  transform: scale(1.05);
 }
 
-/* ── mobile ── */
+.nav__iconBtn:active {
+  transform: scale(0.95);
+}
+
+.nav__iconBtn svg {
+  width: 19px;
+  height: 19px;
+}
+
+.nav__themeIcon {
+  display: block;
+  animation: theme-icon-in 0.35s var(--ease-out);
+}
+
+@keyframes theme-icon-in {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+  }
+}
+
 .nav__toggle {
   display: none;
-  width: 42px;
-  height: 42px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  border: 1px solid var(--border-strong);
-  background: var(--surface);
-  color: #fff;
 }
 
-.nav__toggle svg {
-  width: 20px;
-  height: 20px;
-}
-
+/* ── mobile sheet ── */
+/* Fills the screen below the bar; scrolls itself on short (landscape) screens. */
 .nav__sheet {
   display: none;
   flex-direction: column;
-  gap: 2px;
-  padding: 12px clamp(16px, 4vw, 40px) 24px;
-  background: rgba(6, 8, 20, 0.96);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--border);
-  animation: sheet-in 0.22s ease both;
+  height: calc(100svh - var(--nav-h));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px var(--gutter) 28px;
+  border-top: 1px solid var(--line);
 }
 
 .nav__sheetLink {
-  padding: 13px 4px;
-  color: var(--text-muted);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  animation: sheet-link-in 0.5s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+  transition: color 0.2s ease;
 }
 
 .nav__sheetLink.is-active,
 .nav__sheetLink:hover {
-  color: #fff;
+  color: var(--ink);
 }
 
 .nav__sheetCta {
-  margin-top: 16px;
+  margin-top: 22px;
+  animation: sheet-link-in 0.5s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
 }
 
-@keyframes sheet-in {
+@keyframes sheet-link-in {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(14px);
   }
 }
 
 @media (max-width: 1180px) {
+  .nav__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
   .nav__links {
     display: none;
   }
   .nav__toggle {
-    display: inline-flex;
-  }
-  .nav__inner {
-    justify-content: space-between;
+    display: inline-grid;
   }
   .nav__sheet.is-open {
     display: flex;
@@ -216,27 +319,41 @@
 }
 
 @media (max-width: 560px) {
-  .nav__actions .btn--primary {
+  .nav__cta {
     display: none;
   }
 
   .nav__logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 11px;
-  }
-
-  .nav__logo svg {
-    width: 21px;
-    height: 21px;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
   }
 
   .nav__name {
-    font-size: 17px;
+    font-size: 1rem;
+  }
+}
+
+/* Very narrow phones: keep the tagline clear of the theme and menu buttons. */
+@media (max-width: 400px) {
+  .nav__name {
+    letter-spacing: 0.08em;
   }
 
   .nav__tagline {
-    font-size: 9.5px;
-    letter-spacing: 0.1em;
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* The smallest phones (320px): a smaller name, and the tagline may wrap. */
+@media (max-width: 340px) {
+  .nav__name {
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+  }
+
+  .nav__tagline {
+    white-space: normal;
   }
 }

@@ -1,6 +1,5 @@
 import {
   ArrowRight,
-  CodeGlyph,
   ExternalLinkIcon,
   GitHubIcon,
   LinkedInIcon,
@@ -27,21 +26,27 @@ const ROLES = [
 export default function Hero() {
   return (
     <section className="hero" id="home">
-      {/* ambient background */}
-      <div className="hero__aura" aria-hidden="true">
-        <span className="aura aura--violet" />
-        <span className="aura aura--blue" />
-        <span className="hero__grid" />
-      </div>
-
-      <div className="hero__inner">
+      <div className="shell hero__inner">
         <div className="hero__copy">
+          {/* Each word rises out of its own mask on load. */}
           <h1 className="hero__name">
-            <span className="hero__nameLine">Kavinda</span>
-            <span className="hero__nameLine hero__nameLine--grad">Malwewa</span>
+            <span className="hero__line">
+              <span className="hero__mask">
+                <span className="hero__word" data-hero-word>
+                  Kavinda
+                </span>
+              </span>
+            </span>{' '}
+            <span className="hero__line hero__line--accent">
+              <span className="hero__mask">
+                <span className="hero__word" data-hero-word>
+                  Malwewa
+                </span>
+              </span>
+            </span>
           </h1>
 
-          <p className="hero__roles">
+          <p className="hero__roles" data-hero-fade>
             {ROLES.map((role, i) => (
               <span key={role}>
                 {i > 0 && <span className="hero__sep" aria-hidden="true">|</span>}
@@ -50,29 +55,32 @@ export default function Hero() {
             ))}
           </p>
 
-          <p className="hero__bio">
+          <p className="hero__bio" data-hero-fade>
             Motivated IT undergraduate with a strong foundation in programming,
             software engineering, AI/ML, and quality assurance.
             <br />
             Always learning, always building.
           </p>
 
-          <div className="hero__cta">
-            <a className="btn btn--primary" href="#projects">
+          <div className="hero__cta" data-hero-fade>
+            <a className="btn btn--primary btn--lg" href="#projects">
               View My Work
-              <ArrowRight className="btn__icon" aria-hidden="true" />
+              <ArrowRight className="btn__icon btn__icon--nudge" aria-hidden="true" />
             </a>
-            <a className="btn btn--ghost" href="#contact">
+            <a className="btn btn--ghost btn--lg" href="#contact">
               Contact Me
               <MailIcon className="btn__icon" aria-hidden="true" />
             </a>
           </div>
 
-          <ul className="hero__socials">
+          <ul className="hero__socials" data-hero-fade>
             {SOCIAL_LINKS.map(({ label, href, Icon }) => (
               <li key={label}>
                 <a className="heroSocial" href={href} target="_blank" rel="noreferrer noopener">
-                  <Icon className="heroSocial__icon" aria-hidden="true" />
+                  <Icon
+                    className={`heroSocial__icon heroSocial__icon--${label.toLowerCase()}`}
+                    aria-hidden="true"
+                  />
                   {label}
                   <ExternalLinkIcon className="heroSocial__out" aria-hidden="true" />
                   <span className="sr-only"> (opens in a new tab)</span>
@@ -83,48 +91,24 @@ export default function Hero() {
         </div>
 
         <div className="hero__visual">
-          <span className="hero__dots hero__dots--top" aria-hidden="true" />
-          <span className="hero__dots hero__dots--bottom" aria-hidden="true" />
-
-          <div className="hero__cards">
-            <figure className="photocard">
-              <img
-                className="photocard__img"
-                src={heroPhoto}
-                alt="Kavinda Malwewa"
-                width="1272"
-                height="1236"
-                loading="eager"
-              />
-            </figure>
-
-            <figure className="codecard" aria-hidden="true">
-              <figcaption className="codecard__bar">
-                <CodeGlyph className="codecard__glyph" />
-                <span className="codecard__title">Code</span>
-                <span className="codecard__dot" />
-              </figcaption>
-              <pre className="codecard__body">
-                <code>
-                  <span className="tok-kw">const</span>{' '}
-                  <span className="tok-var">developer</span>{' '}
-                  <span className="tok-op">=</span> {'{'}
-                  {'\n  '}
-                  <span className="tok-prop">name</span>:{' '}
-                  <span className="tok-str">"Kavinda Malwewa"</span>,{'\n  '}
-                  <span className="tok-prop">skills</span>: [
-                  <span className="tok-str">"AI/ML"</span>,{' '}
-                  <span className="tok-str">"SE"</span>,{'\n    '}
-                  <span className="tok-str">"QA"</span>,{' '}
-                  <span className="tok-str">"Software Testing"</span>,{' '}{'\n    '}
-                  <span className="tok-str">"Full Stack Developer"</span>],{'\n  '}
-                  <span className="tok-prop">passion</span>:{' '}
-                  <span className="tok-str">"Building intelligent{'\n    '}solutions"</span>
-                  ,{'\n'}
-                  {'};'}
-                </code>
-              </pre>
-            </figure>
+          <div className="hero__frame">
+            {/* The cut-out portrait on its own: it wipes up into view and settles. */}
+            <div className="hero__stage" data-hero-stage>
+              <div className="hero__shift" data-hero-shift>
+                <div className="hero__wipe" data-hero-wipe>
+                  <img
+                    className="hero__photo"
+                    data-hero-img
+                    src={heroPhoto}
+                    alt="Kavinda Malwewa"
+                    width="1272"
+                    height="1236"
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

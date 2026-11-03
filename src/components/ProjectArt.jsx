@@ -37,12 +37,12 @@ const Frame = ({ id, from, to, children }) => (
 
 /* Floor plan — rooms, walls, furniture blocks. */
 const RoomsArt = () => (
-  <Frame id="rooms" from="#2b1b4d" to="#120d26">
+  <Frame id="rooms" from="#0f2a5c" to="#07122a">
     <g stroke="#c9a86a" strokeWidth="2.5" fill="none" opacity=".85">
       <rect x="58" y="46" width="284" height="158" rx="3" />
       <path d="M188 46v158M58 128h130M188 104h154" />
     </g>
-    <g fill="#a855f7" opacity=".55">
+    <g fill="#3b82f6" opacity=".6">
       <rect x="74" y="62" width="60" height="34" rx="4" />
       <rect x="146" y="62" width="26" height="34" rx="4" />
       <rect x="74" y="146" width="42" height="42" rx="4" />
@@ -242,7 +242,7 @@ const ClassifyArt = () => (
 
 /* Task cards with checkmarks — records being managed. */
 const OrganizerArt = () => (
-  <Frame id="organizer" from="#1e2150" to="#0c0d24">
+  <Frame id="organizer" from="#0b2c47" to="#05121f">
     <rect
       x="62"
       y="34"
@@ -250,16 +250,16 @@ const OrganizerArt = () => (
       height="182"
       rx="10"
       fill="rgba(255,255,255,.035)"
-      stroke="#818cf8"
+      stroke="#38bdf8"
       strokeWidth="2"
     />
-    <path d="M62 66h276" stroke="#818cf8" strokeWidth="1.4" opacity=".6" />
-    <g fill="#a5b4fc" opacity=".8">
+    <path d="M62 66h276" stroke="#38bdf8" strokeWidth="1.4" opacity=".6" />
+    <g fill="#7dd3fc" opacity=".8">
       <circle cx="80" cy="50" r="4" />
       <circle cx="94" cy="50" r="4" />
       <circle cx="108" cy="50" r="4" />
     </g>
-    <rect x="244" y="43" width="78" height="14" rx="7" fill="#818cf8" opacity=".35" />
+    <rect x="244" y="43" width="78" height="14" rx="7" fill="#38bdf8" opacity=".35" />
     {[84, 118, 152, 186].map((y, i) => (
       <g key={y}>
         <rect
@@ -269,7 +269,7 @@ const OrganizerArt = () => (
           height="16"
           rx="4"
           fill="none"
-          stroke="#a5b4fc"
+          stroke="#7dd3fc"
           strokeWidth="1.6"
           opacity=".8"
         />
@@ -277,7 +277,7 @@ const OrganizerArt = () => (
           <path
             d={`M83 ${y + 8}l4 4 7-8`}
             fill="none"
-            stroke="#c7d2fe"
+            stroke="#bae6fd"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -289,7 +289,7 @@ const OrganizerArt = () => (
           width={[150, 116, 178, 134][i]}
           height="10"
           rx="5"
-          fill="#818cf8"
+          fill="#38bdf8"
           opacity={i < 2 ? '.35' : '.55'}
         />
       </g>

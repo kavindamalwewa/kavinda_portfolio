@@ -1,215 +1,182 @@
 .section.contact {
+  padding-bottom: clamp(64px, 8vw, 112px);
+}
+
+/* ── deep band ──────────────────────────────────────────── */
+.contact__band {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding-block: clamp(50px, 6.5vw, 90px);
-  background: #05060f;
+  padding: clamp(44px, 6.4vw, 96px) clamp(14px, 4.4vw, 64px) clamp(14px, 4.4vw, 64px);
+  border-radius: var(--radius-card);
+  background: var(--deep);
 }
 
+/* The reference band is flat; the glow element stays in the markup, unpainted. */
 .contact__glow {
-  position: absolute;
-  z-index: -1;
-  left: -10%;
-  bottom: -30%;
-  width: min(70vw, 620px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(124, 92, 255, 0.3), transparent 68%);
-  filter: blur(70px);
-  pointer-events: none;
+  display: none;
 }
 
-/* ── heading block ──────────────────────────────────────── */
+/* ── heading block ── */
 .contact__head {
   display: grid;
   justify-items: center;
+  margin-bottom: clamp(36px, 5vw, 64px);
   text-align: center;
-  margin-bottom: clamp(34px, 4.5vw, 58px);
 }
 
 .pill {
+  font-family: var(--mono);
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(34, 211, 238, 0.4);
-  background: rgba(34, 211, 238, 0.08);
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--band-line);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #67e8f9;
+  color: var(--on-deep);
 }
 
 .pill__icon {
   width: 15px;
   height: 15px;
+  color: var(--band-accent);
 }
 
 .contact__title {
-  margin-top: 16px;
-  font-size: clamp(28px, 4vw, 46px);
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  margin-top: 20px;
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--on-deep);
+  text-wrap: balance;
 }
 
 .contact__grad {
-  background: linear-gradient(96deg, #22d3ee 0%, #6366f1 55%, #a855f7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.contact__sub {
-  margin-top: 14px;
-  max-width: 52ch;
-  color: var(--text-muted);
-  font-size: clamp(13.5px, 1.1vw, 15px);
-  line-height: 1.65;
+  color: var(--band-accent);
+  font-style: italic;
 }
 
 .contact__note {
-  margin-top: 10px;
-  max-width: 58ch;
-  color: var(--text-dim);
-  font-size: clamp(12.5px, 1vw, 13.5px);
+  max-width: 56ch;
+  margin-top: 20px;
+  font-size: clamp(1.0625rem, 1.25vw, 1.1875rem);
   line-height: 1.7;
+  color: var(--deep-muted);
 }
 
 .contact__rule {
-  width: 58px;
-  height: 3px;
-  margin-top: 22px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #22d3ee, #a855f7);
+  width: 56px;
+  height: 2px;
+  margin-top: 28px;
+  border-radius: 2px;
+  background: var(--band-accent);
 }
 
-/* ── two-column body ────────────────────────────────────── */
+/* ── two-column body ── */
 .contact__grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
-  gap: clamp(18px, 2.6vw, 44px);
-  align-items: start;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(14px, 1.6vw, 20px);
 }
 
 .contact__left {
   display: grid;
-  gap: 16px;
 }
 
 /* ── contact details card ── */
 .infocard {
-  padding: clamp(20px, 2.2vw, 28px);
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.022);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(22px, 2.6vw, 32px);
 }
 
 .infocard__name {
-  font-size: clamp(17px, 1.5vw, 20px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: 2.125rem;
+  font-weight: 400;
 }
 
 .infocard__tagline {
-  margin: 8px 0 20px;
-  font-family: var(--mono);
-  font-size: clamp(11px, 0.9vw, 12.5px);
-  line-height: 1.55;
-  color: #67e8f9;
+  margin: 8px 0 26px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted);
 }
 
-/* ── email / phone rows ── */
 .inforow {
-  --tone: #22d3ee;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 13px;
-  padding: 12px 13px;
+  gap: 16px;
   margin-bottom: 12px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.028);
-  transition: border-color 0.25s ease, background 0.25s ease;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface-2);
+  transition: border-color 0.25s ease;
 }
-
-.inforow--violet { --tone: #a855f7; }
 
 .inforow:hover {
-  border-color: color-mix(in srgb, var(--tone) 45%, transparent);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.inforow__badge {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--tone) 42%, transparent);
-  background: color-mix(in srgb, var(--tone) 16%, transparent);
-  color: var(--tone);
-}
-
-.inforow__icon {
-  width: 19px;
-  height: 19px;
+  border-color: var(--accent);
 }
 
 .inforow__text {
   display: grid;
-  gap: 3px;
+  gap: 2px;
   min-width: 0;
 }
 
 .inforow__label {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 0.75rem;
+  font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--muted);
 }
 
 .inforow__value {
-  font-size: clamp(12.5px, 1.05vw, 14px);
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--ink);
   overflow-wrap: anywhere;
+  text-underline-offset: 3px;
 }
 
 .inforow__value:hover {
-  color: var(--tone);
+  color: var(--accent-ink);
+  text-decoration: underline;
 }
 
 .inforow__copy {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text-muted);
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--muted);
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .inforow__copy svg {
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
 }
 
 .inforow__copy:hover {
-  color: #fff;
-  border-color: var(--border-strong);
-  background: rgba(255, 255, 255, 0.07);
+  color: var(--ink);
+  background: var(--hover);
 }
 
 .inforow__copy.is-copied {
-  color: #4ade80;
-  border-color: rgba(74, 222, 128, 0.45);
-  background: rgba(74, 222, 128, 0.12);
+  border-color: var(--status);
+  background: var(--tint);
+  color: var(--status);
 }
 
 /* ── social tiles ── */
@@ -217,24 +184,26 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 4px;
+  margin: 2px 0 28px;
 }
 
 .social {
   display: flex;
   align-items: center;
-  gap: 11px;
-  padding: 13px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.028);
-  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  gap: 12px;
+  min-height: 76px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  color: var(--ink);
+  transition: translate 0.3s var(--ease-out), border-color 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .social:hover {
-  transform: translateY(-2px);
-  border-color: var(--border-strong);
-  background: rgba(255, 255, 255, 0.055);
+  translate: 0 -2px;
+  border-color: var(--accent);
+  background: var(--surface-2);
 }
 
 .social__icon {
@@ -250,15 +219,14 @@
 }
 
 .social__text b {
-  font-size: 13.5px;
+  font-size: 0.9375rem;
   font-weight: 600;
-  color: #fff;
 }
 
 .social__text i {
+  font-size: 0.8125rem;
   font-style: normal;
-  font-size: 11.5px;
-  color: var(--text-dim);
+  color: var(--muted);
 }
 
 /* ── location ── */
@@ -266,36 +234,31 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  margin-top: 20px;
+  margin-top: auto;
   padding-top: 18px;
-  border-top: 1px solid var(--border);
-  font-family: var(--mono);
-  font-size: clamp(11px, 0.9vw, 12.5px);
-  color: var(--text-muted);
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+  color: var(--muted);
 }
 
 .infocard__pin {
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
   flex-shrink: 0;
-  color: #67e8f9;
+  color: var(--accent);
 }
 
 /* ── message form ───────────────────────────────────────── */
 .msgcard {
   display: grid;
-  gap: 16px;
-  padding: clamp(20px, 2.4vw, 30px);
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.022);
+  align-content: start;
+  gap: 18px;
+  padding: clamp(22px, 2.6vw, 32px);
 }
 
 .msgcard__title {
-  font-size: clamp(17px, 1.5vw, 20px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin-bottom: 2px;
+  font-size: 2.125rem;
+  font-weight: 400;
 }
 
 .field {
@@ -304,75 +267,54 @@
 }
 
 .field__label {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .field__label b {
-  color: #22d3ee;
+  font-weight: 600;
+  color: var(--accent-ink);
 }
 
 .field__input {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: rgba(4, 5, 14, 0.7);
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--field-line);
+  border-radius: var(--radius-field);
+  background: var(--field-bg);
   font: inherit;
-  font-size: 14px;
-  color: var(--text);
-  transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  font-size: 1rem;
+  color: var(--ink);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .field__input::placeholder {
-  color: var(--text-dim);
+  color: var(--placeholder);
 }
 
 .field__input:focus {
   outline: none;
-  border-color: rgba(34, 211, 238, 0.6);
-  background: rgba(4, 5, 14, 0.95);
-  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.16);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--tint);
 }
 
 .field__input--area {
-  min-height: 128px;
+  min-height: 140px;
   resize: vertical;
   line-height: 1.6;
 }
 
 /* highlight only after the browser has flagged a real problem */
 .field__input:not(:placeholder-shown):invalid {
-  border-color: rgba(244, 114, 182, 0.55);
+  border-color: var(--ink);
+  border-width: 2px;
 }
 
 .msgcard__send {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  width: 100%;
   margin-top: 4px;
-  padding: 14px 22px;
-  border-radius: 10px;
-  background: linear-gradient(94deg, #22d3ee 0%, #6366f1 52%, #a855f7 100%);
-  font-size: 15px;
-  font-weight: 600;
-  color: #06121a;
-  box-shadow: 0 14px 32px -14px rgba(99, 102, 241, 0.95);
-  transition: transform 0.22s ease, box-shadow 0.25s ease, filter 0.25s ease;
-}
-
-.msgcard__send:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.06);
-  box-shadow: 0 20px 40px -14px rgba(99, 102, 241, 1);
-}
-
-.msgcard__send:active {
-  transform: translateY(0);
 }
 
 .msgcard__sendIcon {
@@ -380,26 +322,36 @@
   height: 17px;
 }
 
-.msgcard__status:not(:empty) {
-  padding: 10px 13px;
-  border-radius: 9px;
-  border: 1px solid var(--border-strong);
-  background: rgba(255, 255, 255, 0.04);
-  font-size: 12.5px;
-  line-height: 1.55;
-  color: var(--text-muted);
+.msgcard__send[disabled] {
+  cursor: progress;
+  opacity: 0.6;
 }
 
+.msgcard__send[disabled]:active {
+  transform: none;
+}
+
+.msgcard__status:not(:empty) {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* The message itself says what happened; the palette has no green or red. */
 .msgcard__status--ok:not(:empty) {
-  border-color: rgba(74, 222, 128, 0.35);
-  background: rgba(74, 222, 128, 0.1);
-  color: #86efac;
+  border-color: var(--status);
+  background: var(--tint);
+  color: var(--ink);
 }
 
 .msgcard__status--err:not(:empty) {
-  border-color: rgba(248, 113, 113, 0.4);
-  background: rgba(248, 113, 113, 0.1);
-  color: #fca5a5;
+  border-color: var(--ink);
+  background: var(--hover);
+  color: var(--ink);
 }
 
 /* Honeypot: off-screen for people, tempting for bots. Not `display:none`,
@@ -412,17 +364,7 @@
   pointer-events: none;
 }
 
-.msgcard__send[disabled] {
-  cursor: progress;
-  filter: saturate(0.6) brightness(0.85);
-  box-shadow: none;
-}
-
-.msgcard__send[disabled]:hover {
-  transform: none;
-}
-
-/* ── responsive ─────────────────────────────────────────── */
+/* ── responsive ── */
 @media (max-width: 900px) {
   .contact__grid {
     grid-template-columns: 1fr;

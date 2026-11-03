@@ -1,156 +1,119 @@
-.section.education {
-  background: linear-gradient(180deg, #070819 0%, #06070f 100%);
+/* One group per list (Education; Achievements…): a small labelled header,
+   then an even grid of cards — three a row, two on tablets, one on phones. */
+.eduGroup + .eduGroup {
+  margin-top: clamp(40px, 5vw, 64px);
 }
 
-.edu__grid {
-  display: grid;
-  gap: clamp(34px, 4.6vw, 58px);
-}
-
-/* ── column ─────────────────────────────────────────────── */
-.track {
-  --tone: #a855f7;
-}
-
-.track--violet { --tone: #a855f7; }
-.track--cyan { --tone: #38bdf8; }
-
-.track__head {
+.eduGroup__head {
   display: flex;
   align-items: center;
-  gap: 13px;
-  margin-bottom: clamp(20px, 2.4vw, 28px);
-  font-size: clamp(14px, 1.2vw, 16px);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  gap: 14px;
+  margin-bottom: clamp(18px, 2vw, 24px);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--ink);
 }
 
-.track__badge {
+.eduGroup__badge {
+  border: 1px solid var(--line);
+}
+
+.eduGroup__grid {
   display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-  border-radius: 12px;
-  border: 1px solid color-mix(in srgb, var(--tone) 45%, transparent);
-  background: color-mix(in srgb, var(--tone) 14%, transparent);
-  color: var(--tone);
-}
-
-.track__icon {
-  width: 20px;
-  height: 20px;
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--tone) 65%, transparent));
-}
-
-/* ── timeline ── */
-.track__list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  grid-auto-rows: 1fr;
-  gap: clamp(14px, 1.7vw, 20px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 20px);
   margin: 0;
-  /* the <ol> default indent is removed */
   padding: 0;
   list-style: none;
 }
 
-.tItem {
-  position: relative;
-  display: grid;
-  gap: 12px;
-  align-content: start;
-  padding: clamp(16px, 1.8vw, 20px) clamp(16px, 1.8vw, 20px);
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background:
-    radial-gradient(120% 90% at 50% -10%, rgba(255, 255, 255, 0.055), transparent 60%),
-    rgba(255, 255, 255, 0.02);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+/* ── card ── */
+.eduCard {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 2vw, 26px);
+  transition: translate 0.35s var(--ease-out), border-color 0.3s ease;
 }
 
-/* tinted hairline along the top edge, inset to clear the rounded corners */
-.tItem::before {
-  content: '';
-  position: absolute;
-  inset: 0 14px auto;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--tone), transparent);
-  opacity: 0.7;
+.eduCard:hover {
+  translate: 0 -4px;
+  border-color: var(--accent);
 }
 
-.tItem:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--tone) 45%, transparent);
-  box-shadow: 0 22px 45px -22px color-mix(in srgb, var(--tone) 70%, transparent);
+.eduCard__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 18px;
 }
 
-.tItem__date {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--tone) 38%, transparent);
-  background: color-mix(in srgb, var(--tone) 12%, transparent);
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: color-mix(in srgb, var(--tone) 55%, #fff);
-  white-space: nowrap;
-}
-
-.tItem__title {
-  font-size: clamp(15px, 1.3vw, 18px);
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.015em;
-  color: #fff;
-}
-
-.tItem__inst {
-  margin-top: 5px;
-  font-family: var(--mono);
-  font-size: clamp(12px, 1vw, 13.5px);
-  color: var(--tone);
-}
-
-.tItem__detail {
-  margin-top: 5px;
-  font-size: clamp(12px, 0.95vw, 13px);
-  line-height: 1.6;
-  color: var(--text-muted);
-}
-
-/* ── meta: date pill above a location line ── */
-.tItem__meta {
-  display: grid;
-  justify-items: start;
-  gap: 7px;
-  order: -1;
-}
-
-.tItem__loc {
+/* Date as a pill; location as a quiet line under it. */
+.eduCard__date {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 11.5px;
-  color: var(--text-dim);
-  white-space: nowrap;
+  min-height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 9999px;
+  background: var(--tint);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
 }
 
-.tItem__metaIcon {
-  width: 13px;
-  height: 13px;
+.eduCard__loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.eduCard__metaIcon {
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
 }
 
-/* ── responsive ─────────────────────────────────────────── */
-@media (max-width: 560px) {
-  .track__list {
+.eduCard__title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.eduCard__inst {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--accent-ink);
+}
+
+.eduCard__detail {
+  margin-top: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+@media (max-width: 1024px) {
+  .eduGroup__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .eduGroup__grid {
     grid-template-columns: 1fr;
-    grid-auto-rows: auto;
   }
 }
