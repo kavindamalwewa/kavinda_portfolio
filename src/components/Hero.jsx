@@ -77,7 +77,10 @@ export default function Hero() {
             {SOCIAL_LINKS.map(({ label, href, Icon }) => (
               <li key={label}>
                 <a className="heroSocial" href={href} target="_blank" rel="noreferrer noopener">
-                  <Icon className="heroSocial__icon" aria-hidden="true" />
+                  <Icon
+                    className={`heroSocial__icon heroSocial__icon--${label.toLowerCase()}`}
+                    aria-hidden="true"
+                  />
                   {label}
                   <ExternalLinkIcon className="heroSocial__out" aria-hidden="true" />
                   <span className="sr-only"> (opens in a new tab)</span>

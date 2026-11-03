@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import useTheme from '../hooks/useTheme'
 import { lockScroll, unlockScroll } from '../motion/scroll'
-import { CloseIcon, CubeIcon, DownloadIcon, MenuIcon, MoonIcon, SunIcon } from './icons/BrandIcons'
+import { CloseIcon, DownloadIcon, MenuIcon, MoonIcon, SunIcon } from './icons/BrandIcons'
 import './Navbar.css'
 
 const LINKS = [
@@ -107,14 +107,14 @@ export default function Navbar({ cvHref }) {
       <div className="nav__inner">
         <a className="nav__brand" href="#home">
           <span className="nav__logo" aria-hidden="true">
-            <CubeIcon />
+            <img src="/favicon2.png" alt="" />
           </span>
           <span className="nav__brandText">
             <span className="nav__name">
-              Kavinda<span className="nav__dot">.</span>
+              Kavinda<span className="nav__dot"> </span>
               <span className="nav__nameAccent">Malwewa</span>
             </span>
-            <span className="nav__tagline">B.Sc. IT Undergraduate</span>
+            <span className="nav__tagline">BSc. IT Undergraduate</span>
           </span>
         </a>
 
